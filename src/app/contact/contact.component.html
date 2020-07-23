@@ -1,0 +1,30 @@
+<div class="contact-form-container border rounded">
+  <div *ngIf="!showSummary">
+    <form
+      [formGroup]="contactForm"
+      (ngSubmit)="onSubmit()"
+      class="needs-validation"
+      novalidate
+    >
+      <app-input
+        label="Email"
+        placeholder="Please enter Email address.."
+        [control]="email"
+      ></app-input>
+      <app-input
+        label="Message"
+        placeholder="Please enter message.."
+        [control]="message"
+      ></app-input>
+      <button
+        [disabled]="contactForm.invalid"
+        type="submit"
+        class="btn btn-primary"
+        [ngClass]="{ disabled: contactForm.invalid }"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  <div *ngIf="showSummary">Thanks for filling form!!!</div>
+</div>

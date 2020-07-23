@@ -1,0 +1,32 @@
+<div class="flex-container">
+  <div class="flex-container-left border rounded">
+    <app-product-filter (searchValue)="filterData($event)"></app-product-filter>
+    <br />
+    <ul class="list-group">
+      <li
+        class="list-group-item list-group-item-action"
+        *ngFor="let product of products | async"
+        (click)="onClick(product)"
+        [ngClass]="addActiveClass(product)"
+      >
+        <div [ngClass]="addRedWarningClass(product)">
+          {{ product.name }} {{ product.price | currency: "PLN":true }}
+        </div>
+      </li>
+    </ul>
+    <div class="container-center">
+      <pagination
+        [totalItems]="totalItems | async"
+        [itemsPerPage]="limitSize"
+        [(ngModel)]="currentPage"
+        (pageChanged)="pageChanged($event)"
+      >
+      </pagination>
+    </div>
+  </div>
+  <div class="flex-container-right border rounded">
+    <div *ngIf="selectedProduct">
+      <app-product-details [product]="selectedProduct"></app-product-details>
+    </div>
+  </div>
+</div>

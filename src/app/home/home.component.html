@@ -1,0 +1,29 @@
+<div *ngIf="productsToDisplay.length == 0" class="flex-container">
+  <div class="border rounded">
+    No products.
+  </div>
+</div>
+<div *ngIf="productsToDisplay.length == 1" class="flex-container">
+  <div class="border rounded">
+    <app-product-details [product]="productsToDisplay[0]"></app-product-details>
+  </div>
+</div>
+<div *ngIf="productsToDisplay.length == 2" class="flex-container">
+  <div class="border rounded">
+    <app-product-details [product]="productsToDisplay[0]"></app-product-details>
+  </div>
+  <div class="border rounded">
+    <app-product-details [product]="productsToDisplay[1]"></app-product-details>
+  </div>
+</div>
+<div *ngIf="productsToDisplay.length > 2" class="flex-container">
+  <div class="border rounded">
+    <app-product-details [product]="productsToDisplay[0]"></app-product-details>
+  </div>
+  <div class="border rounded">
+    <app-product-details [product]="productsToDisplay[1]"></app-product-details>
+  </div>
+  <div class="border rounded">
+    <app-product-details [product]="productsToDisplay[2]"></app-product-details>
+  </div>
+</div>
