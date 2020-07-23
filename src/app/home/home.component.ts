@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
     const randomProductsInterval = interval(10000);
     randomProductsInterval.subscribe(() => {
-      //this.displayRandomProducts();
+      this.displayRandomProducts();
     });
   }
 
