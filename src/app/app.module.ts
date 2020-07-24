@@ -1,34 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NavigationComponent } from './navigation/navigation.component';
 
+import { HomeModule } from './Home/home.module';
+import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { ContactModule } from './contact/contact.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    ContactComponent,
-    PageNotFoundComponent,
-    NavigationComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HomeModule,
+    SharedModule,
     CoreModule,
     ProductsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    FormsModule,
+    ContactModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ContactService } from '../core/contact.service';
+import { ContactService } from '../contact.service';
 
 @Component({
   selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss'],
+  templateUrl: './contact-form.component.html',
+  styleUrls: ['./contact-form.component.scss'],
 })
-export class ContactComponent implements OnInit {
+export class ContactFormComponent implements OnInit {
   contactForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,

@@ -5,25 +5,25 @@
 </div>
 <div *ngIf="productsToDisplay.length == 1" class="flex-container d-flex justify-content-center">
   <div class="border rounded">
-    <app-product-details [product]="productsToDisplay[0]"></app-product-details>
+    <app-product-tile [product]="productsToDisplay[0]"></app-product-tile>
   </div>
 </div>
 <div *ngIf="productsToDisplay.length == 2" class="flex-container d-flex justify-content-center">
   <div class="border rounded">
-    <app-product-details [product]="productsToDisplay[0]"></app-product-details>
+    <app-product-tile [product]="productsToDisplay[0]"></app-product-tile>
   </div>
   <div class="border rounded">
-    <app-product-details [product]="productsToDisplay[1]"></app-product-details>
+    <app-product-tile [product]="productsToDisplay[1]"></app-product-tile>
   </div>
 </div>
 <div *ngIf="productsToDisplay.length > 2" class="flex-container d-flex justify-content-center">
   <div class="border rounded">
-    <app-product-details [product]="productsToDisplay[0]"></app-product-details>
+    <app-product-tile [product]="productsToDisplay[0]"></app-product-tile>
   </div>
   <div class="border rounded">
-    <app-product-details [product]="productsToDisplay[1]"></app-product-details>
+    <app-product-tile [product]="productsToDisplay[1]"></app-product-tile>
   </div>
   <div class="border rounded">
-    <app-product-details [product]="productsToDisplay[2]"></app-product-details>
+    <app-product-tile [product]="productsToDisplay[2]"></app-product-tile>
   </div>
 </div>

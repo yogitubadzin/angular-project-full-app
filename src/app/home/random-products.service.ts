@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
 import { Product } from '../models/Product';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { HomeModule } from './home.module';
+import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ProductService {
+// @Injectable({
+//   providedIn: HomeModule,
+// })
+@Injectable()
+export class RandomProductsService {
   private _baseUrl = '/api/products';
   private _dataStore: { products: Product[]; totalCount: number } = {
     products: [],
@@ -27,27 +29,9 @@ export class ProductService {
     return this.httpService.get<Product>(`${this._baseUrl}/${id}`);
   }
 
-  public fetchProducts(
-    startPage: number = null,
-    limitSize: number = null,
-    searchFilter: string = null
-  ) {
-    let params = new HttpParams();
-
-    if (startPage != null) {
-      params = params.append('_start', startPage.toString());
-    }
-
-    if (limitSize != null) {
-      params = params.append('_limit', limitSize.toString());
-    }
-
-    if (searchFilter != null) {
-      params = params.append('q', searchFilter);
-    }
-
+  public fetchProducts() {
     return this.httpService
-      .get<Product[]>(this._baseUrl, { params, observe: 'response' })
+      .get<Product[]>(this._baseUrl, { observe: 'response' })
       .pipe(
         map((result) => {
           this._dataStore.products = result.body;

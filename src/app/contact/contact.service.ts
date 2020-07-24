@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Message } from '../models/Message';
+import { ContactModule } from './contact.module';
+import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+// @Injectable({
+//   providedIn: ContactModule,
+// })
+@Injectable()
 export class ContactService {
   private baseUrl = '/api/contact';
 

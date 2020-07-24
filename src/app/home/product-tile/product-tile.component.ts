@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Product } from '../../models/Product';
-import { ProductService } from '../product.service';
+import { RandomProductsService } from '../random-products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-product-details',
-  templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss'],
+  selector: 'app-product-tile',
+  templateUrl: './product-tile.component.html',
+  styleUrls: ['./product-tile.component.scss']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductTileComponent implements OnInit {
+
   @Input()
   product: Product;
   subscription: Subscription;
 
   constructor(
-    private productService: ProductService,
+    private randomProductsService: RandomProductsService,
     private route: ActivatedRoute
   ) {}
 
@@ -26,7 +27,7 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
 
-    this.subscription = this.productService
+    this.subscription = this.randomProductsService
       .getProductById(id)
       .subscribe((data) => {
         this.product = data;

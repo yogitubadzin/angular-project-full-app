@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../core/product.service';
+import { RandomProductsService } from '../random-products.service';
+import { Product } from '../../models/Product';
 import { Subscription, interval } from 'rxjs';
-import { Product } from '../models/Product';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   allProducts: Product[];
   productsToDisplay: Product[] = [];
   productsSubscription: Subscription;
 
-  constructor(private productService: ProductService) {}
+  constructor(private randomProductService: RandomProductsService) {}
 
   ngOnInit(): void {
-    this.productsSubscription = this.productService.products.subscribe(
+    this.productsSubscription = this.randomProductService.products.subscribe(
       (result) => {
         this.allProducts = result;
         this.displayRandomProducts();
       }
     );
 
-    this.productService.fetchProducts();
+    this.randomProductService.fetchProducts();
 
     const randomProductsInterval = interval(10000);
     randomProductsInterval.subscribe(() => {
