@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { HttpClientModule } from '@angular/common/http';
-import { ProductService } from './ProductService';
-import { ContactService } from './ContactService';
+import { ProductService } from './product.service';
+import { ContactService } from './contact.service';
 
 @NgModule({
   declarations: [],

@@ -11,6 +11,6 @@ export class ContactService {
   constructor(private httpService: HttpClient) {}
 
   public sendMessage(message: Message) {
-    this.httpService.post<Message>(this.baseUrl, message).subscribe();
+    return this.httpService.post<Message>(this.baseUrl, message);
   }
 }

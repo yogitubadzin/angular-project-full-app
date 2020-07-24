@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ContactService } from '../core/ContactService';
-import { Message } from '../models/Message';
+import { ContactService } from '../core/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -22,16 +21,27 @@ export class ContactComponent implements OnInit {
   });
 
   showSummary: boolean;
+  showError: boolean;
 
   constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    this.contactService.sendMessage(
-      new Message(this.email.value, this.message.value)
-    );
-    this.showSummary = true;
+    this.contactService
+      .sendMessage({
+        email: this.email.value,
+        message: this.message.value,
+      })
+      .subscribe(
+        () => {
+          this.showError = false;
+          this.showSummary = true;
+        },
+        () => {
+          this.showError = true;
+        }
+      );
   }
 
   get email() {

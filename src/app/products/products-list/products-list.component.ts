@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/Product';
-import { ProductService } from '../../core/ProductService';
+import { ProductService } from '../../core/product.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -28,10 +28,7 @@ export class ProductsListComponent implements OnInit {
       this.selectedProduct = result[0];
     });
 
-    this.productService.fetchProductsWithPaging(
-      this.currentPage - 1,
-      this.limitSize
-    );
+    this.productService.fetchProducts(this.currentPage - 1, this.limitSize);
   }
 
   onClick(product: Product) {
@@ -39,11 +36,12 @@ export class ProductsListComponent implements OnInit {
   }
 
   filterData(filter: string) {
-    this.productService.fetchProductsWithPagingAndFilter(
+    this.productService.fetchProducts(
       this.calculateStartPage(),
       this.limitSize,
       filter
     );
+
     this.filter = filter;
   }
 

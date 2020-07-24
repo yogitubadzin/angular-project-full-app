@@ -26,5 +26,11 @@
       </button>
     </form>
   </div>
-  <div *ngIf="showSummary">Thanks for filling form!!!</div>
+  <div *ngIf="showError" class="text-danger">
+    <br />
+    <div>
+      Error occured with sending form. Please contact with Administrator.
+    </div>
+  </div>
+  <div *ngIf="showSummary" class="text-center">Thanks for filling form!</div>
 </div>
