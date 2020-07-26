@@ -3,8 +3,15 @@
     <i>{{ product.name }}</i>
   </h2>
 </div>
-<br/>
-<p header>{{ product.description }}</p>
-<p>
-  <u><i>{{ product.price | currency: "PLN":true }}</i></u>
-</p>
+<br />
+
+<div class="flex-container">
+  <div class="flex-container-left">
+    <p>{{ product.description }}</p>
+  </div>
+  <div class="flex-container-right">
+    <u
+      ><i>{{ product.price | currency: "PLN":true }}</i></u
+    >
+  </div>
+</div>

@@ -2,3 +2,16 @@
   background-color: white;
   padding: 10px;
 }
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.flex-container-left {
+  flex-grow: 1;
+}
+
+.flex-container-right {
+  //width: 20%;
+}

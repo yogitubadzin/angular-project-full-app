@@ -1,7 +1,7 @@
 .page-not-found-container {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-size: large;
 }
