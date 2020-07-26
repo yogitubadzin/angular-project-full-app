@@ -7,9 +7,9 @@
         class="list-group-item list-group-item-action"
         *ngFor="let product of products | async"
         (click)="onClick(product)"
-        [ngClass]="addActiveClass(product)"
+        [ngClass]="{'active': product.id === selectedProduct.id, 'text-danger': product.price === 0}"
       >
-        <div [ngClass]="addRedWarningClass(product)">
+        <div>
           {{ product.name }} {{ product.price | currency: "PLN":true }}
         </div>
       </li>

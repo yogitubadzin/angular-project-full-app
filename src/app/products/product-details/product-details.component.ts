@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
 export class ProductDetailsComponent implements OnInit {
   @Input()
   product: Product;
-  subscription: Subscription;
 
   constructor(
     private productService: ProductService,
@@ -26,7 +25,7 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
 
-    this.subscription = this.productService
+    this.productService
       .getProductById(id)
       .subscribe((data) => {
         this.product = data;

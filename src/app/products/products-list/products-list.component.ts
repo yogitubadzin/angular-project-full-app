@@ -53,20 +53,4 @@ export class ProductsListComponent implements OnInit {
   calculateStartPage() {
     return (this.currentPage - 1) * this.limitSize;
   }
-
-  addRedWarningClass(product: Product) {
-    if (product.price == 0) {
-      return 'text-danger';
-    } else {
-      return '';
-    }
-  }
-
-  addActiveClass(product: Product) {
-    if (this.selectedProduct.id == product.id) {
-      return 'active';
-    } else {
-      return '';
-    }
-  }
 }
