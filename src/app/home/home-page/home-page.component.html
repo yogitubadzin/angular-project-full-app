@@ -1,13 +1,13 @@
 <div
   *ngIf="productsToDisplay.length == 0"
-  class="flex-container d-flex justify-content-center"
+  class="random-products-container d-flex justify-content-center"
 >
   <div class="border rounded">
     No products.
   </div>
 </div>
 
-<div class="flex-container d-flex justify-content-center">
+<div class="random-products-container d-flex justify-content-center">
   <div
     *ngFor="let item of productsToDisplay | slice: 0:3"
     class="border rounded"

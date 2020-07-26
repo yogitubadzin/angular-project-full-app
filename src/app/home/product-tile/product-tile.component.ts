@@ -10,10 +10,8 @@ import { RandomProductsService } from '../random-products.service';
   styleUrls: ['./product-tile.component.scss']
 })
 export class ProductTileComponent implements OnInit {
-
   @Input()
   product: Product;
-  subscription: Subscription;
 
   constructor(
     private randomProductsService: RandomProductsService,
@@ -26,7 +24,7 @@ export class ProductTileComponent implements OnInit {
       return;
     }
 
-    this.subscription = this.randomProductsService
+    this.randomProductsService
       .getProductById(id)
       .subscribe((data) => {
         this.product = data;

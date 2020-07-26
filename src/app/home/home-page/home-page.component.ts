@@ -9,9 +9,10 @@ import { RandomProductsService } from '../random-products.service';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  allProducts: Product[];
+  private productsSubscription: Subscription;
+  private allProducts: Product[];
+  private randomProductsIntervalSubscription: Subscription;
   productsToDisplay: Product[] = [];
-  productsSubscription: Subscription;
 
   constructor(private randomProductService: RandomProductsService) {}
 
@@ -26,7 +27,7 @@ export class HomePageComponent implements OnInit {
     this.randomProductService.fetchProducts();
 
     const randomProductsInterval = interval(10000);
-    randomProductsInterval.subscribe(() => {
+    this.randomProductsIntervalSubscription = randomProductsInterval.subscribe(() => {
       this.displayRandomProducts();
     });
   }
@@ -39,5 +40,6 @@ export class HomePageComponent implements OnInit {
 
   ngOnDestroy() {
     this.productsSubscription.unsubscribe();
+    this.randomProductsIntervalSubscription.unsubscribe();
   }
 }

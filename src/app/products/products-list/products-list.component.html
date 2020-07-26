@@ -1,5 +1,5 @@
-<div class="flex-container">
-  <div class="flex-container-left border rounded">
+<div class="products-container">
+  <div class="products-list border rounded">
     <app-product-filter (searchValue)="filterData($event)"></app-product-filter>
     <br />
     <ul class="list-group">
@@ -14,17 +14,17 @@
         </div>
       </li>
     </ul>
-    <div class="container-center">
+    <div class="products-list-container-center">
       <pagination
         [totalItems]="totalItems | async"
         [itemsPerPage]="limitSize"
         [(ngModel)]="currentPage"
-        (pageChanged)="pageChanged($event)"
+        (pageChanged)="pageChanged($event.page)"
       >
       </pagination>
     </div>
   </div>
-  <div class="flex-container-right border rounded">
+  <div class="products-details border rounded">
     <div *ngIf="selectedProduct">
       <app-product-details [product]="selectedProduct"></app-product-details>
     </div>

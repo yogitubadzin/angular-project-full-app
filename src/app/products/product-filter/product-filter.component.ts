@@ -6,6 +6,7 @@ import {
   debounceTime,
   distinctUntilChanged,
 } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-filter',
@@ -13,6 +14,7 @@ import {
   styleUrls: ['./product-filter.component.scss'],
 })
 export class ProductFilterComponent implements OnInit {
+  private queryFieldSubscription: Subscription;
   @Output()
   searchValue = new EventEmitter<String>();
   queryField = new FormControl();
@@ -20,7 +22,7 @@ export class ProductFilterComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.queryField.valueChanges
+    this.queryFieldSubscription = this.queryField.valueChanges
       .pipe(
         startWith(''),
         debounceTime(400),
@@ -34,5 +36,9 @@ export class ProductFilterComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     this.searchValue.emit(filterValue);
+  }
+
+  ngDestroy(){
+    this.queryFieldSubscription.unsubscribe();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/Product';
 import { ProductService } from '../product.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products-list',
@@ -9,12 +9,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./products-list.component.scss'],
 })
 export class ProductsListComponent implements OnInit {
+  private filter: string;
+  private productsSubscription: Subscription;
   products: Observable<Product[]>;
-  allProducts: Product[];
-  filteredProducts: Product[];
   selectedProduct: Product;
   totalItems: Observable<Number>;
-  filter: string;
   currentPage = 1;
   limitSize = 5;
 
@@ -24,7 +23,7 @@ export class ProductsListComponent implements OnInit {
     this.products = this.productService.products;
     this.totalItems = this.productService.totalCount;
 
-    this.products.subscribe((result) => {
+    this.productsSubscription = this.products.subscribe((result) => {
       this.selectedProduct = result[0];
     });
 
@@ -45,12 +44,16 @@ export class ProductsListComponent implements OnInit {
     this.filter = filter;
   }
 
-  pageChanged(event: any): void {
-    this.currentPage = event.page;
+  pageChanged(page: number): void {
+    this.currentPage = page;
     this.filterData(this.filter);
   }
 
   calculateStartPage() {
     return (this.currentPage - 1) * this.limitSize;
+  }
+
+  ngDestroy(){
+    this.productsSubscription.unsubscribe();
   }
 }

@@ -1,27 +1,25 @@
 @import "../../../styles.scss";
 
-.flex-container {
+.products-container {
   display: flex;
   justify-content: center;
 }
 
-.flex-container > div {
+.products-container > div {
   background-color: $base-background-color;
   margin: 10px;
   padding: 20px;
 }
 
-.flex-container-left {
+.products-list {
   width: 40%;
-  word-wrap: break-word;
 }
 
-.flex-container-right {
+.products-details {
   width: 60%;
-  word-wrap: break-word;
 }
 
-.container-center {
+.products-list-container-center {
   padding-top: 1px;
   display: flex;
   justify-content: center;
