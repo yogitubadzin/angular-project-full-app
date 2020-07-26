@@ -1,13 +1,12 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HomeRoutingModule } from './home-routing.module';
+import { ProductTileComponent } from './product-tile/product-tile.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { NgModule } from '@angular/core';
+import { RandomProductsService } from './random-products.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
-
-import { HomeRoutingModule } from './home-routing.module';
-import { HomePageComponent } from './home-page/home-page.component';
-import { ProductTileComponent } from './product-tile/product-tile.component';
-import { RandomProductsService } from './random-products.service';
 
 @NgModule({
   declarations: [HomePageComponent, ProductTileComponent],

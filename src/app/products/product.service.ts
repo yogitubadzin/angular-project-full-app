@@ -2,26 +2,22 @@ import { Product } from '../models/Product';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { ProductsModule } from './products.module';
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-// @Injectable({
-//   providedIn: ProductsModule,
-// })
 @Injectable()
 export class ProductService {
-  private _baseUrl = '/api/products';
-  private _dataStore: { products: Product[]; totalCount: number } = { products: [], totalCount: 0, };
-  private _products: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
-  private _totalCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  public products = this._products.asObservable();
-  public totalCount = this._totalCount.asObservable();
+  private baseUrl = '/api/products';
+  private dataStore = { products: [], totalCount: 0 };
+  private productsSubject = new BehaviorSubject<Product[]>([]);
+  private totalCountSubject = new BehaviorSubject<number>(0);
+  public products = this.productsSubject.asObservable();
+  public totalCount = this.totalCountSubject.asObservable();
 
   constructor(private httpService: HttpClient) {}
 
   public getProductById(id: string): Observable<Product> {
-    return this.httpService.get<Product>(`${this._baseUrl}/${id}`);
+    return this.httpService.get<Product>(`${this.baseUrl}/${id}`);
   }
 
   public fetchProducts(
@@ -44,16 +40,16 @@ export class ProductService {
     }
 
     return this.httpService
-      .get<Product[]>(this._baseUrl, { params, observe: 'response' })
+      .get<Product[]>(this.baseUrl, { params, observe: 'response' })
       .pipe(
-        map((result) => {
-          this._dataStore.products = result.body;
-          this._dataStore.totalCount = +result.headers.get('x-total-count');
+        tap((result) => {
+          this.dataStore.products = result.body;
+          this.dataStore.totalCount = +result.headers.get('x-total-count');
         })
       )
       .subscribe(() => {
-        this._products.next(this._dataStore.products);
-        this._totalCount.next(this._dataStore.totalCount);
+        this.productsSubject.next(this.dataStore.products);
+        this.totalCountSubject.next(this.dataStore.totalCount);
       });
   }
 }

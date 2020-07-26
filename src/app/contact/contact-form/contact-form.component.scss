@@ -1,7 +1,9 @@
+@import "../../../styles.scss";
+
 .contact-form-container {
   margin: auto;
   padding: 10px;
-  background-color: azure;
+  background-color: $base-background-color;
   margin-top: 50px;
   width: 500px;
 }

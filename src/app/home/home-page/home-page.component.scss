@@ -1,5 +1,7 @@
+@import "../../../styles.scss";
+
 .flex-container > div {
-  background-color: azure;
+  background-color: $base-background-color;
   margin: 10px;
   padding: 20px;
   font-size: 25px;

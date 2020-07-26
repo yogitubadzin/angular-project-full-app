@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ContactService } from '../contact.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-form.component.scss'],
 })
 export class ContactFormComponent implements OnInit {
-  contactForm = new FormGroup({
-    email: new FormControl('', [
+  contactForm = this.fb.group({
+    email: this.fb.control('', [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
     ]),
-    message: new FormControl('', [
+    message: this.fb.control('', [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(200),
@@ -23,7 +23,7 @@ export class ContactFormComponent implements OnInit {
   showSummary: boolean;
   showError: boolean;
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactService, private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 

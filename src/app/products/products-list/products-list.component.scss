@@ -1,10 +1,12 @@
+@import "../../../styles.scss";
+
 .flex-container {
   display: flex;
   justify-content: center;
 }
 
 .flex-container > div {
-  background-color: azure;
+  background-color: $base-background-color;
   margin: 10px;
   padding: 20px;
 }

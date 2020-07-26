@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RandomProductsService } from '../random-products.service';
-import { Product } from '../../models/Product';
+import { Product } from 'src/app/models/Product';
 import { Subscription, interval } from 'rxjs';
+import { RandomProductsService } from '../random-products.service';
 
 @Component({
   selector: 'app-home',

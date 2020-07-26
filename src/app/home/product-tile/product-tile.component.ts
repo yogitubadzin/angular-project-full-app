@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { Product } from '../../models/Product';
-import { RandomProductsService } from '../random-products.service';
-import { ActivatedRoute } from '@angular/router';
+import { Input, OnInit, Component } from '@angular/core';
+import { Product } from 'src/app/models/Product';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { RandomProductsService } from '../random-products.service';
 
 @Component({
   selector: 'app-product-tile',

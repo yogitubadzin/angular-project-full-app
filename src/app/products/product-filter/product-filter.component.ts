@@ -15,7 +15,7 @@ import {
 export class ProductFilterComponent implements OnInit {
   @Output()
   searchValue = new EventEmitter<String>();
-  queryField: FormControl = new FormControl();
+  queryField = new FormControl();
 
   constructor() {}
 
