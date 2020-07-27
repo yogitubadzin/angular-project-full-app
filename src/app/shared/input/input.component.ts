@@ -1,5 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { InputRefDirective } from './../input-ref.directive';
+import {
+  Component,
+  OnInit,
+  Input,
+  ContentChild,
+  HostListener,
+} from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -7,16 +14,26 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
-  @Input() control: FormControl;
   @Input() label: string;
-  @Input() placeholder: string;
+  control: AbstractControl;
+  @ContentChild(InputRefDirective) input: InputRefDirective;
 
   constructor() {}
 
   ngOnInit() {}
 
   showErrors() {
-    const { dirty, touched, errors } = this.control;
-    return dirty && touched && errors;
+    if (this.input.formControl === null) {
+      return;
+    }
+
+    const { dirty, touched, errors } = this.input.formControl;
+    return dirty && touched && errors != null;
+  }
+
+  @HostListener('change', ['$event'])
+  @HostListener('focusout', ['$event'])
+  toggleOpen(event: Event) {
+    this.input.setIsInvalid(this.showErrors());
   }
 }

@@ -1,31 +1,26 @@
 <div class="form-row">
   <div class="col-md mb-3">
     <label>{{ label }}</label>
-    <input
-      class="form-control"
-      placeholder="{{ placeholder }}"
-      [formControl]="control"
-      [ngClass]="{ 'is-danger': showErrors() }"
-    />
+    <ng-content [ngClass]="{ 'is-danger': showErrors() }"></ng-content>
     <ng-container *ngIf="showErrors()">
-      <div class="text-danger" *ngIf="control.errors.required">
+      <div class="text-danger" *ngIf="this.input.formControl.errors.required">
         Value is required.
       </div>
-      <div class="text-danger" *ngIf="control.errors.minlength">
+      <div class="text-danger" *ngIf="this.input.formControl.errors.minlength">
         Value you entered is
-        {{ control.errors.minlength.actualLength }}
+        {{ this.input.formControl.errors.minlength.actualLength }}
         characters long, but it must be at least
-        {{ control.errors.minlength.requiredLength }}
+        {{ this.input.formControl.errors.minlength.requiredLength }}
         characters.
       </div>
-      <div class="text-danger" *ngIf="control.errors.maxlength">
+      <div class="text-danger" *ngIf="this.input.formControl.errors.maxlength">
         Value you entered is
-        {{ control.errors.maxlength.actualLength }}
+        {{ this.input.formControl.errors.maxlength.actualLength }}
         characters long, but it cannot be longer than
-        {{ control.errors.maxlength.requiredLength }}
+        {{ this.input.formControl.errors.maxlength.requiredLength }}
         characters.
       </div>
-      <div class="text-danger" *ngIf="control.errors.pattern">
+      <div class="text-danger" *ngIf="this.input.formControl.errors.pattern">
         Invalid format.
       </div>
     </ng-container>

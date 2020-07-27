@@ -6,16 +6,21 @@
       class="needs-validation"
       novalidate
     >
-      <app-input
-        label="Email"
-        placeholder="Please enter Email address.."
-        [control]="email"
-      ></app-input>
-      <app-input
-        label="Message"
-        placeholder="Please enter message.."
-        [control]="message"
-      ></app-input>
+      <app-input label="Email">
+        <input
+          [appInputRef]="this.contactForm.get('email')"
+          class="form-control"
+          [formControl]="email"
+          placeholder="Please enter Email address.."
+        />
+      </app-input>
+      <app-input label="Message"
+        ><input
+          [appInputRef]="this.contactForm.get('message')"
+          class="form-control"
+          [formControl]="message"
+          placeholder="Please enter message.."
+      /></app-input>
       <button
         [disabled]="contactForm.invalid"
         type="submit"
