@@ -27,12 +27,12 @@ export class RandomProductsService {
   }
 
   public fetchRandomProductsPage() {
-    const randomNumber = this.getRandomNumber(1, this.dataStore.totalPages);
-    const startPage = randomNumber * 3;
+    const randomNumberPage = this.getRandomNumber(0, this.dataStore.totalPages - 1);
+    const startPage = randomNumberPage * 3;
     this.fetchProducts(startPage);
   }
   private getRandomNumber(min: number, max: number) {
-    return Math.ceil(Math.random() * (max - min) + min);
+    return Math.round(Math.random() * (max - min) + min);
   }
 
   private fetchProducts(startPage: number) {
