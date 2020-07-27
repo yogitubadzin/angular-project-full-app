@@ -23,16 +23,11 @@ export class ProductFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.queryFieldSubscription = this.queryField.valueChanges
-      .pipe(
-        startWith(''),
-        debounceTime(400),
-        distinctUntilChanged(),
-        map((value) => this._filter(value))
-      )
-      .subscribe();
+      .pipe(startWith(''), debounceTime(400), distinctUntilChanged())
+      .subscribe((value) => this._filter(value));
   }
 
-  ngDestroy(){
+  ngDestroy() {
     this.queryFieldSubscription.unsubscribe();
   }
 

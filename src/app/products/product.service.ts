@@ -8,7 +8,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProductService {
   private baseUrl = '/api/products';
-  private dataStore = { products: [], totalCount: 0 };
+  private dataStore: { products: Product[]; totalCount: number } = {
+    products: [],
+    totalCount: 0,
+  };
   private productsSubject = new BehaviorSubject<Product[]>([]);
   private totalCountSubject = new BehaviorSubject<number>(0);
   public products = this.productsSubject.asObservable();
@@ -43,11 +46,13 @@ export class ProductService {
       .get<Product[]>(this.baseUrl, { params, observe: 'response' })
       .pipe(
         tap((result) => {
-          this.dataStore.products = result.body;
           this.dataStore.totalCount = +result.headers.get('x-total-count');
+          this.dataStore.products = result.body;
+          return result.body;
         })
       )
-      .subscribe(() => {
+      .subscribe((result) => {
+        this.dataStore.products = result.body;
         this.productsSubject.next(this.dataStore.products);
         this.totalCountSubject.next(this.dataStore.totalCount);
       });

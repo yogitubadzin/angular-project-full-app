@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { Subscription, interval } from 'rxjs';
 import { RandomProductsService } from '../random-products.service';
+import { concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -9,31 +10,34 @@ import { RandomProductsService } from '../random-products.service';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  private randomProductsSubscription: Subscription;
-  private randomProductsIntervalSubscription: Subscription;
+  private subscriptions: Subscription;
   productsToDisplay: Product[] = [];
 
-  constructor(private randomProductService: RandomProductsService) {}
+  constructor(private randomProductService: RandomProductsService) {
+    this.subscriptions = new Subscription();
+  }
 
   ngOnInit(): void {
-    this.randomProductsSubscription = this.randomProductService.randomProducts.subscribe(
-      (result) => {
+    this.subscriptions.add(
+      this.randomProductService.randomProducts.subscribe((result) => {
         this.productsToDisplay = result;
-      }
+      })
     );
 
     this.randomProductService.fetchFirstPageRandomProducts();
 
-    const randomProductsInterval = interval(10000);
-    this.randomProductsIntervalSubscription = randomProductsInterval.subscribe(
-      () => {
-        this.randomProductService.fetchRandomProductsPage();
-      }
+    this.subscriptions.add(
+      interval(10000)
+        .pipe(
+          concatMap(async () =>
+            this.randomProductService.fetchRandomProductsPage()
+          )
+        )
+        .subscribe()
     );
   }
 
   ngOnDestroy() {
-    this.randomProductsSubscription.unsubscribe();
-    this.randomProductsIntervalSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }
