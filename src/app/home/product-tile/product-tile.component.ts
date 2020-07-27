@@ -1,6 +1,5 @@
 import { Input, OnInit, Component } from '@angular/core';
-import { Product } from 'src/app/models/Product';
-import { Subscription } from 'rxjs';
+import { Product } from 'src/app/models/product';
 import { ActivatedRoute } from '@angular/router';
 import { RandomProductsService } from '../random-products.service';
 

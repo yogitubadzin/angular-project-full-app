@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { Product } from '../../models/Product';
+import { Product } from '../../models/product';
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Message } from '../models/Message';
+import { Message } from '../models/message';
 import { Injectable } from '@angular/core';
 
 @Injectable()

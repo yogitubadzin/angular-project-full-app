@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/Product';
+import { Product } from 'src/app/models/product';
 import { Subscription, interval } from 'rxjs';
 import { RandomProductsService } from '../random-products.service';
 
@@ -9,37 +9,31 @@ import { RandomProductsService } from '../random-products.service';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  private productsSubscription: Subscription;
-  private allProducts: Product[];
+  private randomProductsSubscription: Subscription;
   private randomProductsIntervalSubscription: Subscription;
   productsToDisplay: Product[] = [];
 
   constructor(private randomProductService: RandomProductsService) {}
 
   ngOnInit(): void {
-    this.productsSubscription = this.randomProductService.products.subscribe(
+    this.randomProductsSubscription = this.randomProductService.randomProducts.subscribe(
       (result) => {
-        this.allProducts = result;
-        this.displayRandomProducts();
+        this.productsToDisplay = result;
       }
     );
 
-    this.randomProductService.fetchProducts();
+    this.randomProductService.fetchFirstPageRandomProducts();
 
     const randomProductsInterval = interval(10000);
-    this.randomProductsIntervalSubscription = randomProductsInterval.subscribe(() => {
-      this.displayRandomProducts();
-    });
-  }
-
-  displayRandomProducts() {
-    this.productsToDisplay = this.allProducts
-      .sort(() => Math.random() - Math.random())
-      .slice(0, 3);
+    this.randomProductsIntervalSubscription = randomProductsInterval.subscribe(
+      () => {
+        this.randomProductService.fetchRandomProductsPage();
+      }
+    );
   }
 
   ngOnDestroy() {
-    this.productsSubscription.unsubscribe();
+    this.randomProductsSubscription.unsubscribe();
     this.randomProductsIntervalSubscription.unsubscribe();
   }
 }

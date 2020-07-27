@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/Product';
+import { Product } from '../models/product';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class RandomProductsService {
   private baseUrl = '/api/products';
-  private dataStore = { products: [], totalCount: 0 };
-  private productsSubject = new BehaviorSubject<Product[]>([]);
-  private totalCountSubject = new BehaviorSubject<number>(0);
-  public products = this.productsSubject.asObservable();
-  public totalCount = this.totalCountSubject.asObservable();
+  private dataStore = { randomProducts: [], totalPages: 0 };
+  private randomProductsSubject = new BehaviorSubject<Product[]>([]);
+  public randomProducts = this.randomProductsSubject.asObservable();
 
   constructor(private httpService: HttpClient) {}
 
@@ -19,18 +17,40 @@ export class RandomProductsService {
     return this.httpService.get<Product>(`${this.baseUrl}/${id}`);
   }
 
-  public fetchProducts() {
+  public fetchFirstPageRandomProducts() {
+    if (this.dataStore.totalPages > 0) {
+      this.fetchRandomProductsPage();
+      return;
+    }
+
+    this.fetchProducts(0);
+  }
+
+  public fetchRandomProductsPage() {
+    const randomNumber = this.getRandomNumber(1, this.dataStore.totalPages);
+    const startPage = randomNumber * 3;
+    this.fetchProducts(startPage);
+  }
+  private getRandomNumber(min: number, max: number) {
+    return Math.ceil(Math.random() * (max - min) + min);
+  }
+
+  private fetchProducts(startPage: number) {
+    let params = new HttpParams();
+    params = params.append('_start', startPage.toString());
+    params = params.append('_limit', '3');
+
     return this.httpService
-      .get<Product[]>(this.baseUrl, { observe: 'response' })
+      .get<Product[]>(this.baseUrl, { params, observe: 'response' })
       .pipe(
         tap((result) => {
-          this.dataStore.products = result.body;
-          this.dataStore.totalCount = +result.headers.get('x-total-count');
+          this.dataStore.randomProducts = result.body;
+          const totalCount = +result.headers.get('x-total-count');
+          this.dataStore.totalPages = Math.ceil(totalCount / 3);
         })
       )
       .subscribe(() => {
-        this.productsSubject.next(this.dataStore.products);
-        this.totalCountSubject.next(this.dataStore.totalCount);
+        this.randomProductsSubject.next(this.dataStore.randomProducts);
       });
   }
 }

@@ -9,7 +9,7 @@
 
 <div class="random-products-container d-flex justify-content-center">
   <div
-    *ngFor="let item of productsToDisplay | slice: 0:3"
+    *ngFor="let item of productsToDisplay"
     class="border rounded"
   >
     <app-product-tile [product]="item"></app-product-tile>

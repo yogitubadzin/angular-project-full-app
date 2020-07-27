@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/Product';
+import { Product } from '../../models/product';
 import { ProductService } from '../product.service';
 import { Observable, Subscription } from 'rxjs';
 
@@ -35,13 +35,13 @@ export class ProductsListComponent implements OnInit {
   }
 
   filterData(filter: string) {
+    this.setFilter(filter);
+
     this.productService.fetchProducts(
       this.calculateStartPage(),
       this.limitSize,
-      filter
+      this.filter
     );
-
-    this.filter = filter;
   }
 
   pageChanged(page: number): void {
@@ -49,11 +49,15 @@ export class ProductsListComponent implements OnInit {
     this.filterData(this.filter);
   }
 
-  calculateStartPage() {
+  ngDestroy() {
+    this.productsSubscription.unsubscribe();
+  }
+
+  private calculateStartPage() {
     return (this.currentPage - 1) * this.limitSize;
   }
 
-  ngDestroy(){
-    this.productsSubscription.unsubscribe();
+  private setFilter(filter: string) {
+    this.filter = filter;
   }
 }

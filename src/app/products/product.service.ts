@@ -1,4 +1,4 @@
-import { Product } from '../models/Product';
+import { Product } from '../models/product';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';

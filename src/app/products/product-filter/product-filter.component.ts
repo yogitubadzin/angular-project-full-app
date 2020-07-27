@@ -32,13 +32,13 @@ export class ProductFilterComponent implements OnInit {
       .subscribe();
   }
 
+  ngDestroy(){
+    this.queryFieldSubscription.unsubscribe();
+  }
+
   private _filter(value: string) {
     const filterValue = value.toLowerCase();
 
     this.searchValue.emit(filterValue);
-  }
-
-  ngDestroy(){
-    this.queryFieldSubscription.unsubscribe();
   }
 }
