@@ -1,17 +1,19 @@
-<div class="header border rounded">
-  <h2>
-    <i>{{ product.name }}</i>
-  </h2>
-</div>
-<br />
-
-<div class="product-container">
-  <div class="product-description-container">
-    <p>{{ product.description }}</p>
+<div *ngIf="product">
+  <div class="header border rounded">
+    <h2>
+      <i>{{ product.name }}</i>
+    </h2>
   </div>
-  <div class="product-price-container">
-    <u
-      ><i>{{ product.price | currency: "PLN":true }}</i></u
-    >
+  <br />
+
+  <div class="product-container">
+    <div class="product-description-container">
+      <p>{{ product.description }}</p>
+    </div>
+    <div class="product-price-container">
+      <u
+        ><i>{{ product.price | currency: "PLN":"symbol" }}</i></u
+      >
+    </div>
   </div>
 </div>

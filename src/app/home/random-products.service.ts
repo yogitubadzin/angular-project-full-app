@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 
@@ -12,10 +12,6 @@ export class RandomProductsService {
   public randomProducts$ = this.randomProductsSubject$.asObservable();
 
   constructor(private httpService: HttpClient) {}
-
-  public getProductById(id: string): Observable<Product> {
-    return this.httpService.get<Product>(`${this.baseUrl}/${id}`);
-  }
 
   public fetchFirstPageRandomProducts() {
     if (this.dataStore.totalPages > 0) {

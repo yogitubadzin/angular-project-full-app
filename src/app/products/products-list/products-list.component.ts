@@ -12,8 +12,10 @@ export class ProductsListComponent implements OnInit {
   private filter: string;
   private productsSubscription$: Subscription;
   products$: Observable<Product[]>;
-  selectedProduct: Product;
+  selectedProductId: string;
+  selectedProductDetailsId: string;
   totalItems$: Observable<Number>;
+  isProductChanged: boolean;
   currentPage = 1;
   limitSize = 5;
 
@@ -24,14 +26,19 @@ export class ProductsListComponent implements OnInit {
     this.totalItems$ = this.productService.totalCount$;
 
     this.productsSubscription$ = this.products$.subscribe((result) => {
-      this.selectedProduct = result[0];
+      if (result.length === 0) {
+        this.setSelectedProductId(null);
+        return;
+      }
+
+      this.setSelectedProductId(result[0].id);
     });
 
     this.productService.fetchProducts(this.currentPage - 1, this.limitSize);
   }
 
   onClick(product: Product) {
-    this.selectedProduct = product;
+    this.setSelectedProductId(product.id);
   }
 
   filterData(filter: string) {
@@ -59,5 +66,9 @@ export class ProductsListComponent implements OnInit {
 
   private setFilter(filter: string) {
     this.filter = filter;
+  }
+
+  private setSelectedProductId(selectedProductId) {
+    this.selectedProductId = selectedProductId;
   }
 }

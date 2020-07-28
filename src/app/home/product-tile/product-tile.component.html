@@ -3,8 +3,10 @@
     <i>{{ product.name }}</i>
   </h2>
 </div>
-<br/>
+<br />
 <p>{{ product.description }}</p>
 <p>
-  <u><i>{{ product.price | currency: "PLN":true }}</i></u>
+  <u
+    ><i>{{ product.price | currency: "PLN":"symbol" }}</i></u
+  >
 </p>

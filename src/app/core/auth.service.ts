@@ -5,20 +5,17 @@ import { filter } from 'rxjs/operators';
 import { authConfig } from './auth.config';
 import { Router } from '@angular/router';
 
-@Injectable(
-  {
+@Injectable({
   providedIn: 'root',
-}
-)
+})
 export class AuthService {
   private isLoggedInSubject$ = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject$.asObservable();
 
-  constructor(private oauthService: OAuthService, private router: Router) {
-    this.prepareOAuthService();
-  }
+  constructor(private oauthService: OAuthService, private router: Router) {}
 
   public login(targetUrl?: string) {
+    this.prepareOAuthService();
     this.oauthService.initLoginFlow(targetUrl);
   }
 
