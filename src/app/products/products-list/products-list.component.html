@@ -12,8 +12,18 @@
           'text-danger': product.price === 0
         }"
       >
-        <div>
-          {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
+        <div class="d-flex">
+          <div class="mr-auto p-2">
+            {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
+          </div>
+          <div class="p-2">
+            <button
+              class="btn btn-secondary"
+              [routerLink]="['/products', product.id]"
+            >
+              View details
+            </button>
+          </div>
         </div>
       </li>
     </ul>
@@ -26,10 +36,5 @@
       >
       </pagination>
     </div>
-  </div>
-  <div class="products-details border rounded">
-    <div *ngIf="selectedProductId">
-      <app-product-details [productId]="selectedProductId"></app-product-details>
-   </div>
   </div>
 </div>

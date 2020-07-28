@@ -1,8 +1,8 @@
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-details',
@@ -10,27 +10,25 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  @Input()
-  productId: string;
   product: Product;
   productSubscription$: Subscription;
-  isLoaded: boolean;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const productId = this.route.snapshot.params['id'];
 
-  ngOnChanges() {
     this.productSubscription$ = this.productService
-      .getProductById(this.productId)
+      .getProductById(productId)
       .subscribe((result) => {
         this.product = result;
-        this.isLoaded = true;
       });
   }
 
   ngOnDestroy() {
     this.productSubscription$.unsubscribe();
-    this.isLoaded = false;
   }
 }

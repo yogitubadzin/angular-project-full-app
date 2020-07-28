@@ -1,19 +1,25 @@
-<div *ngIf="product">
-  <div class="header border rounded">
+<div class="button-back-to-list">
+  <button class="btn btn-secondary" [routerLink]="['/products']">
+    Back to list
+  </button>
+</div>
+<div *ngIf="product" class="product-details-container border rounded shadow">
+  <div class="product-header header border rounded bg-dark">
     <h2>
       <i>{{ product.name }}</i>
     </h2>
   </div>
   <br />
-
-  <div class="product-container">
-    <div class="product-description-container">
-      <p>{{ product.description }}</p>
-    </div>
-    <div class="product-price-container">
+  <div class="product-content">
+    <div>Name: {{ product.name }}</div>
+    <br />
+    <div>
+      Price:
       <u
         ><i>{{ product.price | currency: "PLN":"symbol" }}</i></u
       >
     </div>
+    <br />
+    <div>Description: {{ product.description }}</div>
   </div>
 </div>
