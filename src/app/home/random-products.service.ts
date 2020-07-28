@@ -8,8 +8,8 @@ import { tap, map } from 'rxjs/operators';
 export class RandomProductsService {
   private baseUrl = '/api/products';
   private dataStore = { randomProducts: [], totalPages: 0 };
-  private randomProductsSubject = new BehaviorSubject<Product[]>([]);
-  public randomProducts = this.randomProductsSubject.asObservable();
+  private randomProductsSubject$ = new BehaviorSubject<Product[]>([]);
+  public randomProducts$ = this.randomProductsSubject$.asObservable();
 
   constructor(private httpService: HttpClient) {}
 
@@ -56,7 +56,7 @@ export class RandomProductsService {
       )
       .subscribe((result) => {
         this.dataStore.randomProducts = result;
-        this.randomProductsSubject.next(this.dataStore.randomProducts);
+        this.randomProductsSubject$.next(this.dataStore.randomProducts);
       });
   }
 }

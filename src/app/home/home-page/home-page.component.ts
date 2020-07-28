@@ -10,23 +10,23 @@ import { concatMap } from 'rxjs/operators';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  private subscriptions: Subscription;
+  private subscriptions$: Subscription;
   productsToDisplay: Product[] = [];
 
   constructor(private randomProductService: RandomProductsService) {
-    this.subscriptions = new Subscription();
+    this.subscriptions$ = new Subscription();
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.randomProductService.randomProducts.subscribe((result) => {
+    this.subscriptions$.add(
+      this.randomProductService.randomProducts$.subscribe((result) => {
         this.productsToDisplay = result;
       })
     );
 
     this.randomProductService.fetchFirstPageRandomProducts();
 
-    this.subscriptions.add(
+    this.subscriptions$.add(
       interval(10000)
         .pipe(
           concatMap(async () =>
@@ -38,6 +38,6 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscriptions.unsubscribe();
+    this.subscriptions$.unsubscribe();
   }
 }

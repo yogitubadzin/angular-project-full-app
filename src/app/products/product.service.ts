@@ -12,10 +12,10 @@ export class ProductService {
     products: [],
     totalCount: 0,
   };
-  private productsSubject = new BehaviorSubject<Product[]>([]);
-  private totalCountSubject = new BehaviorSubject<number>(0);
-  public products = this.productsSubject.asObservable();
-  public totalCount = this.totalCountSubject.asObservable();
+  private productsSubject$ = new BehaviorSubject<Product[]>([]);
+  private totalCountSubject$ = new BehaviorSubject<number>(0);
+  public products$ = this.productsSubject$.asObservable();
+  public totalCount$ = this.totalCountSubject$.asObservable();
 
   constructor(private httpService: HttpClient) {}
 
@@ -54,8 +54,8 @@ export class ProductService {
       )
       .subscribe((result) => {
         this.dataStore.products = result;
-        this.productsSubject.next(this.dataStore.products);
-        this.totalCountSubject.next(this.dataStore.totalCount);
+        this.productsSubject$.next(this.dataStore.products);
+        this.totalCountSubject$.next(this.dataStore.totalCount);
       });
   }
 }

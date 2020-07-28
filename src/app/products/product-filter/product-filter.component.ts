@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./product-filter.component.scss'],
 })
 export class ProductFilterComponent implements OnInit {
-  private queryFieldSubscription: Subscription;
+  private queryFieldSubscription$: Subscription;
   @Output()
   searchValue = new EventEmitter<String>();
   queryField = new FormControl();
@@ -22,13 +22,13 @@ export class ProductFilterComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.queryFieldSubscription = this.queryField.valueChanges
+    this.queryFieldSubscription$ = this.queryField.valueChanges
       .pipe(startWith(''), debounceTime(400), distinctUntilChanged())
       .subscribe((value) => this._filter(value));
   }
 
   ngDestroy() {
-    this.queryFieldSubscription.unsubscribe();
+    this.queryFieldSubscription$.unsubscribe();
   }
 
   private _filter(value: string) {

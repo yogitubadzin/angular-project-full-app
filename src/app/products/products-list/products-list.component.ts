@@ -10,20 +10,20 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ProductsListComponent implements OnInit {
   private filter: string;
-  private productsSubscription: Subscription;
-  products: Observable<Product[]>;
+  private productsSubscription$: Subscription;
+  products$: Observable<Product[]>;
   selectedProduct: Product;
-  totalItems: Observable<Number>;
+  totalItems$: Observable<Number>;
   currentPage = 1;
   limitSize = 5;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.products = this.productService.products;
-    this.totalItems = this.productService.totalCount;
+    this.products$ = this.productService.products$;
+    this.totalItems$ = this.productService.totalCount$;
 
-    this.productsSubscription = this.products.subscribe((result) => {
+    this.productsSubscription$ = this.products$.subscribe((result) => {
       this.selectedProduct = result[0];
     });
 
@@ -50,7 +50,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngDestroy() {
-    this.productsSubscription.unsubscribe();
+    this.productsSubscription$.unsubscribe();
   }
 
   private calculateStartPage() {

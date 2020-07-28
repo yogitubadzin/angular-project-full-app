@@ -9,21 +9,26 @@ import { Subscription } from 'rxjs';
 })
 export class NavigationComponent implements OnInit {
   isLoggedIn: boolean;
-  isLoggedInSubscription: Subscription;
+  isLoggedInSubscription$: Subscription;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.isLoggedInSubscription = this.authService.isLoggedIn.subscribe(
+    this.isLoggedInSubscription$ = this.authService.isLoggedIn$.subscribe(
       (result) => {
         this.isLoggedIn = result;
       }
     );
+  }
 
-    this.authService.fetchLogin();
+  login() {
+    this.authService.login();
+  }
+  logout() {
+    this.authService.logout();
   }
 
   ngOnDestroy() {
-    this.isLoggedInSubscription.unsubscribe();
+    this.isLoggedInSubscription$.unsubscribe();
   }
 }
