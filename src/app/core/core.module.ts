@@ -4,6 +4,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, PaginationModule.forRoot()],
+  imports: [CommonModule, PaginationModule.forRoot()]
 })
 export class CoreModule {}

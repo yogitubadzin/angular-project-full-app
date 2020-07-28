@@ -14,12 +14,17 @@ import { InputRefDirective } from './input-ref.directive';
     NavigationComponent,
     InputRefDirective,
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule
+  ],
   exports: [
     InputComponent,
     PageNotFoundComponent,
     NavigationComponent,
-    InputRefDirective,
+    InputRefDirective
   ],
 })
 export class SharedModule {}
