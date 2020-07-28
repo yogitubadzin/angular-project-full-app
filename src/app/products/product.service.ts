@@ -2,7 +2,7 @@ import { Product } from '../models/product';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -47,12 +47,13 @@ export class ProductService {
       .pipe(
         tap((result) => {
           this.dataStore.totalCount = +result.headers.get('x-total-count');
-          this.dataStore.products = result.body;
+        }),
+        map((result): Product[] => {
           return result.body;
         })
       )
       .subscribe((result) => {
-        this.dataStore.products = result.body;
+        this.dataStore.products = result;
         this.productsSubject.next(this.dataStore.products);
         this.totalCountSubject.next(this.dataStore.totalCount);
       });

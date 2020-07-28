@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable()
 export class RandomProductsService {
@@ -27,7 +27,10 @@ export class RandomProductsService {
   }
 
   public fetchRandomProductsPage() {
-    const randomNumberPage = this.getRandomNumber(0, this.dataStore.totalPages - 1);
+    const randomNumberPage = this.getRandomNumber(
+      0,
+      this.dataStore.totalPages - 1
+    );
     const startPage = randomNumberPage * 3;
     this.fetchProducts(startPage);
   }
@@ -44,12 +47,15 @@ export class RandomProductsService {
       .get<Product[]>(this.baseUrl, { params, observe: 'response' })
       .pipe(
         tap((result) => {
-          this.dataStore.randomProducts = result.body;
           const totalCount = +result.headers.get('x-total-count');
           this.dataStore.totalPages = Math.ceil(totalCount / 3);
+        }),
+        map((result): Product[] => {
+          return result.body;
         })
       )
-      .subscribe(() => {
+      .subscribe((result) => {
+        this.dataStore.randomProducts = result;
         this.randomProductsSubject.next(this.dataStore.randomProducts);
       });
   }

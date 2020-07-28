@@ -16,7 +16,7 @@ export class InputRefDirective {
     return this.control;
   }
 
-  public setIsInvalid(isInvalid){
+  public setIsInvalid(isInvalid) {
     this.isInvalid = isInvalid;
   }
 }
