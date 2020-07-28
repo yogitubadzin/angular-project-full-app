@@ -5,7 +5,7 @@
     <ul class="list-group">
       <li
         class="list-group-item list-group-item-action"
-        *ngFor="let product of products | async"
+        *ngFor="let product of products$ | async"
         (click)="onClick(product)"
         [ngClass]="{'active': product.id === selectedProduct.id, 'text-danger': product.price === 0}"
       >
@@ -16,7 +16,7 @@
     </ul>
     <div class="products-list-container-center">
       <pagination
-        [totalItems]="totalItems | async"
+        [totalItems]="totalItems$ | async"
         [itemsPerPage]="limitSize"
         [(ngModel)]="currentPage"
         (pageChanged)="pageChanged($event.page)"

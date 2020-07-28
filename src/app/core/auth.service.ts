@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { filter } from 'rxjs/operators';
-import { authCodeFlowConfig } from '../auth.config';
+import { authConfig } from './auth.config';
 import { Router } from '@angular/router';
 
 @Injectable(
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   private prepareOAuthService() {
-    this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.configure(authConfig);
     this.oauthService.loadDiscoveryDocumentAndLogin();
 
     window.addEventListener('storage', (event) => {

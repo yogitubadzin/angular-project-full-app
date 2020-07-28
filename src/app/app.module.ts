@@ -7,7 +7,7 @@ import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, CoreModule],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, CoreModule.forRoot()],
   providers: [],
   bootstrap: [AppComponent],
 })

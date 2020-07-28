@@ -3,9 +3,9 @@ import { Router, CanActivate } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable(
-  {
-  providedIn: 'root',
-}
+//   {
+//   providedIn: 'root',
+// }
 )
 @Injectable()
 export class AuthGuard implements CanActivate {

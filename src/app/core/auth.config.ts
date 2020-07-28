@@ -1,6 +1,6 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
 
-export const authCodeFlowConfig: AuthConfig = {
+export const authConfig: AuthConfig = {
   issuer: 'https://dev-ruhyufti.eu.auth0.com',
   redirectUri: window.location.origin + '/',
   clientId: 'mHzvLAAwc4USwRSeUm2WX43im5VWmiEF',
