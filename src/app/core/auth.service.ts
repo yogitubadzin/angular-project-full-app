@@ -12,51 +12,40 @@ export class AuthService {
   private isLoggedInSubject$ = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject$.asObservable();
 
-  constructor(private oauthService: OAuthService, private router: Router) {}
-
-  public login(targetUrl?: string) {
+  constructor(private oauthService: OAuthService, private router: Router) {
     this.prepareOAuthService();
-    this.oauthService.initLoginFlow(targetUrl);
+  }
+
+  public login() {
+    this.oauthService.initLoginFlow();
   }
 
   public logout() {
     this.oauthService.logOut();
+    this.isLoggedInSubject$.next(false);
   }
 
   private prepareOAuthService() {
     this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndLogin();
-
-    window.addEventListener('storage', (event) => {
-      if (event.key !== 'access_token' && event.key !== null) {
-        return;
-      }
-
-      this.isLoggedInSubject$.next(this.oauthService.hasValidAccessToken());
-
-      if (!this.oauthService.hasValidAccessToken()) {
-        this.navigateToLoginPage();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      if (this.oauthService.hasValidAccessToken()) {
+        this.isLoggedInSubject$.next(true);
       }
     });
-
-    this.oauthService.events.subscribe((_) => {
-      this.isLoggedInSubject$.next(this.oauthService.hasValidAccessToken());
-    });
-
-    this.oauthService.events
-      .pipe(filter((e) => ['token_received'].includes(e.type)))
-      .subscribe((e) => this.oauthService.loadUserProfile());
 
     this.oauthService.events
       .pipe(
-        filter((e) => ['session_terminated', 'session_error'].includes(e.type))
+        filter(
+          (e) => e.type === 'token_received' || e.type === 'token_refreshed'
+        )
       )
-      .subscribe((e) => this.navigateToLoginPage());
+      .subscribe((_) => this.isLoggedInSubject$.next(true));
 
+    this.oauthService.events
+      .pipe(filter((e) => e.type === 'session_terminated'))
+      .subscribe((_) => {
+        this.isLoggedInSubject$.next(false);
+      });
     this.oauthService.setupAutomaticSilentRefresh();
-  }
-
-  private navigateToLoginPage() {
-    this.router.navigateByUrl('/home');
   }
 }
