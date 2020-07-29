@@ -1,3 +1,4 @@
+import { AdminProductService } from './admin-product.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -36,6 +37,6 @@ import { AdminContactService } from './admin-contact.service';
     HttpClientModule,
     SharedModule,
   ],
-  providers: [AdminContactService],
+  providers: [AdminContactService, AdminProductService],
 })
 export class AdminModule {}

@@ -1,1 +1,4 @@
-<p>product-add works!</p>
+<app-product-form
+  [showError]="showError"
+  (productToSave)="onSubmitForm($event)"
+></app-product-form>

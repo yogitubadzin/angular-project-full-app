@@ -23,6 +23,12 @@
       <div class="text-danger" *ngIf="this.input.formControl.errors.pattern">
         Invalid format.
       </div>
+      <div class="text-danger" *ngIf="this.input.formControl.errors.min">
+        Value is to low.
+      </div>
+      <div class="text-danger" *ngIf="this.input.formControl.errors.max">
+        Value is to high.
+      </div>
     </ng-container>
   </div>
 </div>

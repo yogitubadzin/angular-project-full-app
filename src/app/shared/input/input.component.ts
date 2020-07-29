@@ -33,6 +33,8 @@ export class InputComponent implements OnInit {
 
   @HostListener('change', ['$event'])
   @HostListener('focusout', ['$event'])
+  @HostListener('click', ['$event'])
+  @HostListener('onkeyup', ['$event'])
   toggleOpen(event: Event) {
     this.input.setIsInvalid(this.showErrors());
   }

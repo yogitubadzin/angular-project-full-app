@@ -206,15 +206,15 @@
   "products": [
     {
       "name": "Product #12",
+      "price": "55",
       "description": "Product #1 description",
-      "price": 1.23,
       "id": 1
     },
     {
-      "id": 2,
       "name": "Product #2",
+      "price": "5",
       "description": "Product #2 description",
-      "price": 0
+      "id": 2
     },
     {
       "id": 3,
@@ -275,6 +275,120 @@
       "name": "Product #12",
       "description": "Product #6 description",
       "price": 26.23
+    },
+    {
+      "name": "Product 1",
+      "price": "32",
+      "description": "32",
+      "id": 13
+    },
+    {
+      "name": "fdfdfddf",
+      "price": "4",
+      "description": "4",
+      "id": 14
+    },
+    {
+      "name": "fgfgfgf",
+      "price": "4",
+      "description": "4",
+      "id": 15
+    },
+    {
+      "name": "rtrtr",
+      "price": "4",
+      "description": "4",
+      "id": 16
+    },
+    {
+      "name": "dfdf45",
+      "price": "5",
+      "description": "5",
+      "id": 17
+    },
+    {
+      "name": "rfgtdrty",
+      "price": "45",
+      "description": "45",
+      "id": 18
+    },
+    {
+      "name": "frrfr",
+      "price": "3",
+      "description": "3",
+      "id": 19
+    },
+    {
+      "name": "trtrtr",
+      "price": "454",
+      "description": "454",
+      "id": 20
+    },
+    {
+      "name": "fdgfg",
+      "price": "342",
+      "description": "342",
+      "id": 21
+    },
+    {
+      "name": "gtttt",
+      "price": "5",
+      "description": "5",
+      "id": 22
+    },
+    {
+      "name": "5454rr",
+      "price": "5",
+      "description": "5",
+      "id": 23
+    },
+    {
+      "name": "fgfgfgf",
+      "price": "4",
+      "description": "4",
+      "id": 24
+    },
+    {
+      "name": "fvgfgf",
+      "price": "3",
+      "description": "3",
+      "id": 25
+    },
+    {
+      "name": "reretr",
+      "price": "5",
+      "description": "5",
+      "id": 26
+    },
+    {
+      "name": "45gfgf",
+      "price": "4",
+      "description": "4",
+      "id": 27
+    },
+    {
+      "name": "hghgg",
+      "price": "5",
+      "description": "5",
+      "id": 28
+    },
+    {
+      "name": "34trtr",
+      "price": "344",
+      "description": "344",
+      "id": 29
+    },
+    {
+      "name": "Wypasiony",
+      "price": "45",
+      "description": "45",
+      "id": 30
+    },
+    {
+      "name": "wypasiony2",
+      "price": "353",
+      "description": "wypasiony ze hej2",
+      "id": 31
     }
   ]
 }
