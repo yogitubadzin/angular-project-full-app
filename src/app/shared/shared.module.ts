@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule } from '@angular/router';
 import { InputRefDirective } from './input-ref.directive';
+import { InputSearchComponent } from './input-search/input-search.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { InputRefDirective } from './input-ref.directive';
     PageNotFoundComponent,
     NavigationComponent,
     InputRefDirective,
+    InputSearchComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { InputRefDirective } from './input-ref.directive';
     InputComponent,
     PageNotFoundComponent,
     NavigationComponent,
-    InputRefDirective
+    InputRefDirective,
+    InputSearchComponent
   ],
 })
 export class SharedModule {}

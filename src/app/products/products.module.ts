@@ -8,14 +8,12 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
     ProductsListComponent,
-    ProductDetailsComponent,
-    ProductFilterComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -28,8 +26,7 @@ import { ProductService } from './product.service';
   ],
   exports: [
     ProductsListComponent,
-    ProductDetailsComponent,
-    ProductFilterComponent,
+    ProductDetailsComponent
   ],
   providers:[ProductService]
 })

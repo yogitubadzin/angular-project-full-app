@@ -1,25 +1,24 @@
-<div class="products-container">
-  <div class="products-list border rounded">
-    <app-input-search (searchValue)="filterData($event)" placeholder="Search products.."></app-input-search>
+<div class="messages-container">
+  <div class="messages-list border rounded">
+    <app-input-search (searchValue)="filterData($event)" placeholder="Search messages.."></app-input-search>
     <br />
     <ul class="list-group">
       <li
         class="list-group-item list-group-item-action"
-        *ngFor="let product of products$ | async"
-        (click)="onClick(product)"
+        *ngFor="let message of messages$ | async"
+        (click)="onClick(message)"
         [ngClass]="{
-          active: product.id === selectedProductId,
-          'text-danger': product.price === 0
+          active: message.id === selectedMessageId
         }"
       >
         <div class="d-flex">
           <div class="mr-auto p-2">
-            {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
+            {{ message.email }}
           </div>
           <div class="p-2">
             <button
               class="btn btn-secondary"
-              [routerLink]="['/products', product.id]"
+              [routerLink]="['/admin/messages', message.id]"
             >
               View details
             </button>
@@ -27,7 +26,7 @@
         </div>
       </li>
     </ul>
-    <div class="products-list-container-center">
+    <div class="messages-list-container-center">
       <pagination
         [totalItems]="totalItems$ | async"
         [itemsPerPage]="limitSize"
