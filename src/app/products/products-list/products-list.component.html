@@ -1,4 +1,4 @@
-<div class="button-create-new-product">
+<div class="button-create-new-product" *ngIf="this.isLoggedIn">
   <button class="btn btn-secondary" [routerLink]="['/admin/products/create']">
     Create new Product
   </button>
@@ -21,7 +21,7 @@
           <div class="mr-auto p-2">
             {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
           </div>
-          <div class="p-2">
+          <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"
               [routerLink]="['/admin/products/edit', product.id]"
@@ -29,7 +29,7 @@
               Edit
             </button>
           </div>
-          <div class="p-2">
+          <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"
               [routerLink]="['/products', product.id]"

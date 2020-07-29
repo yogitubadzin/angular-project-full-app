@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../product.service';
 import { Observable, Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-products-list',
@@ -10,7 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ProductsListComponent implements OnInit {
   private filter: string;
-  private productsSubscription$: Subscription;
+  private subscriptions$: Subscription;
   products$: Observable<Product[]>;
   selectedProductId: string;
   selectedProductDetailsId: string;
@@ -18,21 +19,35 @@ export class ProductsListComponent implements OnInit {
   isProductChanged: boolean;
   currentPage = 1;
   limitSize = 5;
+  isLoggedIn: boolean;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService
+  ) {
+    this.subscriptions$ = new Subscription();
+  }
 
   ngOnInit() {
+    this.subscriptions$.add(
+      this.authService.isLoggedIn$.subscribe((result) => {
+        this.isLoggedIn = result;
+      })
+    );
+
     this.products$ = this.productService.products$;
     this.totalItems$ = this.productService.totalCount$;
 
-    this.productsSubscription$ = this.products$.subscribe((result) => {
-      if (result.length === 0) {
-        this.setSelectedProductId(null);
-        return;
-      }
+    this.subscriptions$.add(
+      this.products$.subscribe((result) => {
+        if (result.length === 0) {
+          this.setSelectedProductId(null);
+          return;
+        }
 
-      this.setSelectedProductId(result[0].id);
-    });
+        this.setSelectedProductId(result[0].id);
+      })
+    );
 
     this.productService.fetchProducts(this.currentPage - 1, this.limitSize);
   }
@@ -57,7 +72,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngDestroy() {
-    this.productsSubscription$.unsubscribe();
+    this.subscriptions$.unsubscribe();
   }
 
   private calculateStartPage() {
