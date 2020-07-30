@@ -12,11 +12,8 @@ export class CartProductService {
   public products$ = this.productsSubject$.asObservable();
   private productsCounterSubject$ = new BehaviorSubject<number>(0);
   public productsCounter$ = this.productsCounterSubject$.asObservable();
-  private random: number;
 
-  constructor() {
-    this.random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-  }
+  constructor() {}
 
   public addProduct(product: Product) {
     return of(this.addProductToCart(product));
@@ -34,6 +31,7 @@ export class CartProductService {
 
   public buy() {
     localStorage.removeItem(this.dataCart);
+    this.productsCounterSubject$.next(0);
   }
 
   public countProducts() {
@@ -44,7 +42,6 @@ export class CartProductService {
       productsCounter += value[1].count;
     });
 
-    let c = this.random;
     this.productsCounterSubject$.next(productsCounter);
   }
 
