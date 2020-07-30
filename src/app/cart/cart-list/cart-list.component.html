@@ -1,0 +1,24 @@
+
+<div class="products-container">
+  <div class="products-list border rounded">
+    <h4>Cart Summary</h4>
+    <br />
+    <ul class="list-group">
+      <li
+        class="list-group-item list-group-item-action"
+        *ngFor="let product of products"
+      >
+        <div class="d-flex">
+          <div class="mr-auto p-2">
+            {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="button-buy-products" >
+  <button (click)="buyProducts()" class="btn btn-primary float-right" >
+    Buy products
+  </button>
+</div>

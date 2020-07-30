@@ -21,6 +21,14 @@
           <div class="mr-auto p-2">
             {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
           </div>
+          <div class="p-2">
+            <button
+              class="btn btn-secondary"
+              [routerLink]="['/cart/add', product.id]"
+            >
+              Add to Cart
+            </button>
+          </div>
           <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"

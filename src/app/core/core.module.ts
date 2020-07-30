@@ -13,7 +13,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     PaginationModule.forRoot(),
     OAuthModule.forRoot(),
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

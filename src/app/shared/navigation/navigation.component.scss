@@ -8,6 +8,21 @@ a {
   color: gold;
 }
 
-.link-hover:hover{
-  color:gold;
+.link-hover:hover {
+  color: gold;
+}
+
+.icon-position {
+  position: relative;
+  .cart-basket {
+    font-size: 0.6rem;
+    position: absolute;
+    top: 5px;
+    right: 3px;
+    width: 15px;
+    height: 15px;
+    color: #fff;
+    background-color: #418deb;
+    border-radius: 50%;
+  }
 }

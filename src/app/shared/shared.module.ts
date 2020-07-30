@@ -16,18 +16,13 @@ import { InputSearchComponent } from './input-search/input-search.component';
     InputRefDirective,
     InputSearchComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
   exports: [
     InputComponent,
     PageNotFoundComponent,
     NavigationComponent,
     InputRefDirective,
-    InputSearchComponent
+    InputSearchComponent,
   ],
 })
 export class SharedModule {}

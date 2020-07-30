@@ -1,0 +1,21 @@
+<div *ngIf="showError" class="text-danger">
+  <br />
+  <div>
+    Error occured with adding product. Please contact with Administrator.
+  </div>
+</div>
+<div *ngIf="showSummary" class="text-center">
+  <div class="summary-message-container border rounded">Product was added to cart!</div>
+  <br />
+  <div>
+    <button class="btn btn-primary" [routerLink]="['/products']">
+      Continue shopping
+    </button>
+  </div>
+  <br />
+  <div>
+    <button class="btn btn-primary" [routerLink]="['/cart']">
+      Go to cart summary
+    </button>
+  </div>
+</div>

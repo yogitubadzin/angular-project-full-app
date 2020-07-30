@@ -1,0 +1,26 @@
+@import "../../../styles.scss";
+
+.button-buy-products {
+  margin: 10px;
+}
+
+.products-container {
+  display: flex;
+  justify-content: center;
+}
+
+.products-container > div {
+  background-color: $base-background-color;
+  margin: 10px;
+  padding: 20px;
+}
+
+.products-list {
+  width: 100%;
+}
+
+.products-list-container-center {
+  padding-top: 1px;
+  display: flex;
+  justify-content: center;
+}
