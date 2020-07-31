@@ -5,7 +5,10 @@
 </div>
 <div class="products-container">
   <div class="products-list border rounded">
-    <app-input-search (searchValue)="filterData($event)" placeholder="Search products.."></app-input-search>
+    <app-input-search
+      (searchValue)="filterData($event)"
+      placeholder="Search products.."
+    ></app-input-search>
     <br />
     <ul class="list-group">
       <li
@@ -19,12 +22,15 @@
       >
         <div class="d-flex">
           <div class="mr-auto p-2">
-            {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
+            Name: <i>{{ product.name }}</i
+            >, Price: <i>{{ product.price | currency: "PLN":"symbol" }}</i
+            >, Stock status: <i>{{ product.stockStatus }}</i>
           </div>
           <div class="p-2">
             <button
               class="btn btn-secondary"
               [routerLink]="['/cart/add', product.id]"
+              [disabled]="product.stockStatus == 0"
             >
               Add to Cart
             </button>

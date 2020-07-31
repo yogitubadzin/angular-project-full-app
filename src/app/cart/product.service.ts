@@ -12,4 +12,8 @@ export class ProductService {
   public getById(id: string): Observable<Product> {
     return this.httpService.get<Product>(`${this.baseUrl}/${id}`);
   }
+
+  public update(product: Product) {
+    return this.httpService.put<Product>(`${this.baseUrl}/${product.id}`, product);
+  }
 }

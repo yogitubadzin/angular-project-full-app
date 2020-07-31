@@ -29,6 +29,7 @@ export class AddProductComponent implements OnInit {
     this.productService.getById(productId).subscribe(
       (product: Product) => {
         this.addProduct(product);
+        this.updateProduct(product);
       },
       () => {
         this.showError = true;
@@ -38,6 +39,19 @@ export class AddProductComponent implements OnInit {
 
   addProduct(product: Product) {
     this.cartService.addProduct(product).subscribe(
+      () => {
+        this.showError = false;
+        this.showSummary = true;
+      },
+      () => {
+        this.showError = true;
+      }
+    );
+  }
+
+  updateProduct(product: Product) {
+    product.stockStatus = --product.stockStatus;
+    this.productService.update(product).subscribe(
       () => {
         this.showError = false;
         this.showSummary = true;

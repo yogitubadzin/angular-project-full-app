@@ -27,6 +27,13 @@
         [formControl]="description"
         placeholder="Please enter description.."
     /></app-input>
+    <app-input label="Stock status"
+      ><input
+        [appInputRef]="this.productForm.get('stockStatus')"
+        class="form-control"
+        [formControl]="stockStatus"
+        placeholder="Please enter stock status.."
+    /></app-input>
     <input type="hidden" id="id" [formControl]="id" />
     <button
       [disabled]="productForm.invalid"
