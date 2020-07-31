@@ -43,12 +43,20 @@
               Edit
             </button>
           </div>
-          <div class="p-2" *ngIf="this.isLoggedIn">
+          <div class="p-2">
             <button
               class="btn btn-secondary"
               [routerLink]="['/products', product.id]"
             >
               Details
+            </button>
+          </div>
+          <div class="p-2" *ngIf="this.isLoggedIn">
+            <button
+              class="btn btn-secondary"
+              [routerLink]="['/admin/products/delete', product.id]"
+            >
+              Delete
             </button>
           </div>
         </div>

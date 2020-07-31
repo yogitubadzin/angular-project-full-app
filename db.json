@@ -21,13 +21,6 @@
   "contact": [],
   "products": [
     {
-      "name": "Ford Mondeo",
-      "price": "100",
-      "description": "Nice car",
-      "stockStatus": "5",
-      "id": 1
-    },
-    {
       "name": "Skoda Superb",
       "price": "200",
       "description": "Very nice car",

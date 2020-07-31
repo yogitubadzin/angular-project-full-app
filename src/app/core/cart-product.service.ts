@@ -36,6 +36,10 @@ export class CartProductService {
 
   public countProducts() {
     const retrievedDataCart = localStorage.getItem(this.dataCart);
+    if (retrievedDataCart === null || retrievedDataCart === undefined) {
+      return;
+    }
+
     const deserialisedDataCart = JSON.parse(retrievedDataCart);
     let productsCounter = 0;
     deserialisedDataCart.map(function (value) {
