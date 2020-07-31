@@ -1,3 +1,4 @@
+<script src="./src/bootstrap-input-spinner.js"></script>
 <div class="product-form-container border rounded">
   <form
     [formGroup]="productForm"
@@ -29,10 +30,14 @@
     /></app-input>
     <app-input label="Stock status"
       ><input
-        [appInputRef]="this.productForm.get('stockStatus')"
         class="form-control"
+        [appInputRef]="this.productForm.get('stockStatus')"
         [formControl]="stockStatus"
-        placeholder="Please enter stock status.."
+        type="number"
+        value="0"
+        min="0"
+        max="1000"
+        step="1"
     /></app-input>
     <input type="hidden" id="id" [formControl]="id" />
     <button
@@ -43,13 +48,9 @@
     >
       Submit
     </button>
-    <button
-    type="button"
-    class="btn btn-primary"
-    (click)="cancel()"
-  >
-    Cancel
-  </button>
+    <button type="button" class="btn btn-primary" (click)="cancel()">
+      Cancel
+    </button>
   </form>
   <div *ngIf="showError" class="text-danger">
     <br />
