@@ -62,7 +62,7 @@ export class CartProductService {
       dataCartMap.set(product.id, {
         productId: product.id,
         count: 1,
-        price: product.price,
+        price: product.price as number,
         name: product.name,
       });
     }

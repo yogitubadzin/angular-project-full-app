@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CartProductItem } from 'src/app/models/cartProductItem';
 import { CartProductService } from 'src/app/core/cart-product.service';
@@ -12,20 +13,25 @@ export class CartListComponent implements OnInit {
   products: CartProductItem[];
   numberOfProducts = 0;
   overallPrice = 0;
+  productsSubscription$: Subscription;
 
-  constructor(
-    private cartService: CartProductService,
-    private router: Router
-  ) {}
+  constructor(private cartService: CartProductService, private router: Router) {
+    this.productsSubscription$ = new Subscription();
+  }
 
   ngOnInit(): void {
-    this.cartService.products$.subscribe((result) => {
-      this.products = result;
-      this.products.forEach((product) => {
-        this.numberOfProducts = this.numberOfProducts + product.count;
-        this.overallPrice = this.overallPrice + product.price;
-      });
-    });
+    this.productsSubscription$.add(
+      this.cartService.products$.subscribe((result) => {
+        this.numberOfProducts = 0;
+        this.overallPrice = 0;
+        this.products = result;
+        this.products.forEach((product) => {
+          this.numberOfProducts = this.numberOfProducts + product.count;
+          this.overallPrice =
+            +product.price * product.count + this.overallPrice;
+        });
+      })
+    );
 
     this.cartService.fetchProducts();
   }
@@ -33,5 +39,9 @@ export class CartListComponent implements OnInit {
   buyProducts() {
     this.cartService.buy();
     this.router.navigate(['/cart/finish']);
+  }
+
+  ngOnDestroy() {
+    this.productsSubscription$.unsubscribe();
   }
 }
