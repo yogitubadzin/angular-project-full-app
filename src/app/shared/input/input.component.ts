@@ -28,13 +28,13 @@ export class InputComponent implements OnInit {
     }
 
     const { dirty, touched, errors } = this.input.formControl;
-    return dirty && touched && errors != null;
+    return dirty && touched && errors !== null;
   }
 
-  @HostListener('change', ['$event'])
-  @HostListener('focusout', ['$event'])
-  @HostListener('click', ['$event'])
-  @HostListener('onkeyup', ['$event'])
+  @HostListener('change')
+  @HostListener('focusout')
+  @HostListener('click')
+  @HostListener('onkeyup')
   toggleOpen(event: Event) {
     this.input.setIsInvalid(this.showErrors());
   }

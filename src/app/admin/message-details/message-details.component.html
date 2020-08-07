@@ -1,5 +1,5 @@
 <div class="button-back-to-list">
-  <button class="btn btn-secondary" [routerLink]="['/admin/messages']">
+  <button class="btn btn-secondary" routerLink="/admin/messages">
     Back to list
   </button>
 </div>
@@ -9,7 +9,6 @@
       <i>{{ message.email }}</i>
     </h2>
   </div>
-  <br />
   <div class="message-content">
     <div>Email: {{ message.message }}</div>
   </div>

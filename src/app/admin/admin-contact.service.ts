@@ -29,15 +29,15 @@ export class AdminContactService {
   ) {
     let params = new HttpParams();
 
-    if (startPage != null) {
+    if (startPage !== null) {
       params = params.append('_start', startPage.toString());
     }
 
-    if (limitSize != null) {
+    if (limitSize !== null) {
       params = params.append('_limit', limitSize.toString());
     }
 
-    if (searchFilter != null) {
+    if (searchFilter !== null) {
       params = params.append('q', searchFilter);
     }
 

@@ -11,11 +11,11 @@ import { AuthService } from 'src/app/core/auth.service';
 })
 export class ProductsListComponent implements OnInit {
   private filter: string;
-  private subscriptions$: Subscription;
+  private subscriptions: Subscription;
   products$: Observable<Product[]>;
   selectedProductId: string;
   selectedProductDetailsId: string;
-  totalItems$: Observable<Number>;
+  totalItems$: Observable<number>;
   isProductChanged: boolean;
   currentPage = 1;
   limitSize = 5;
@@ -25,11 +25,11 @@ export class ProductsListComponent implements OnInit {
     private productService: ProductService,
     private authService: AuthService
   ) {
-    this.subscriptions$ = new Subscription();
+    this.subscriptions = new Subscription();
   }
 
   ngOnInit() {
-    this.subscriptions$.add(
+    this.subscriptions.add(
       this.authService.isLoggedIn$.subscribe((result) => {
         this.isLoggedIn = result;
       })
@@ -38,7 +38,7 @@ export class ProductsListComponent implements OnInit {
     this.products$ = this.productService.products$;
     this.totalItems$ = this.productService.totalCount$;
 
-    this.subscriptions$.add(
+    this.subscriptions.add(
       this.products$.subscribe((result) => {
         if (result.length === 0) {
           this.setSelectedProductId(null);
@@ -72,7 +72,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngDestroy() {
-    this.subscriptions$.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   private calculateStartPage() {

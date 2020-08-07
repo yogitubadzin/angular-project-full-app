@@ -1,12 +1,11 @@
 <div class="button-create-new-product" *ngIf="this.isLoggedIn">
-  <button class="btn btn-secondary" [routerLink]="['/admin/products/create']">
+  <button class="btn btn-secondary" routerLink="/admin/products/create">
     Create new Product
   </button>
 </div>
 <div class="products-container">
   <div class="products-list border rounded">
     <app-input-search (searchValue)="filterData($event)" placeholder="Search products.."></app-input-search>
-    <br />
     <ul class="list-group">
       <li
         class="list-group-item list-group-item-action"
@@ -24,7 +23,7 @@
           <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"
-              [routerLink]="['/admin/products/edit', product.id]"
+              routerLink="['/admin/products/edit', product.id]"
             >
               Edit
             </button>
@@ -32,7 +31,7 @@
           <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"
-              [routerLink]="['/products', product.id]"
+              routerLink="['/products', product.id]"
             >
               Details
             </button>
