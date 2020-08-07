@@ -1,11 +1,14 @@
 <div class="button-create-new-product" *ngIf="this.isLoggedIn">
-  <button class="btn btn-secondary" routerLink="/admin/products/create">
+  <button class="btn btn-secondary" [routerLink]="['/admin/products/create']">
     Create new Product
   </button>
 </div>
 <div class="products-container">
   <div class="products-list border rounded">
-    <app-input-search (searchValue)="filterData($event)" placeholder="Search products.."></app-input-search>
+    <app-input-search
+      (searchValue)="filterData($event)"
+      placeholder="Search products.."
+    ></app-input-search>
     <ul class="list-group">
       <li
         class="list-group-item list-group-item-action"
@@ -18,22 +21,41 @@
       >
         <div class="d-flex">
           <div class="mr-auto p-2">
-            {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
+            Name: <i>{{ product.name }}</i
+            >, Price: <i>{{ product.price | currency: "PLN":"symbol" }}</i
+            >, Stock status: <i>{{ product.stockStatus }}</i>
           </div>
-          <div class="p-2" *ngIf="this.isLoggedIn">
+          <div class="p-2">
             <button
               class="btn btn-secondary"
-              routerLink="['/admin/products/edit', product.id]"
+              [routerLink]="['/cart/add', product.id]"
+              [disabled]="product.stockStatus == 0"
             >
-              Edit
+              Add to Cart
             </button>
           </div>
           <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"
-              routerLink="['/products', product.id]"
+              [routerLink]="['/admin/products/edit', product.id]"
+            >
+              Edit
+            </button>
+          </div>
+          <div class="p-2">
+            <button
+              class="btn btn-secondary"
+              [routerLink]="['/products', product.id]"
             >
               Details
+            </button>
+          </div>
+          <div class="p-2" *ngIf="this.isLoggedIn">
+            <button
+              class="btn btn-secondary"
+              [routerLink]="['/admin/products/delete', product.id]"
+            >
+              Delete
             </button>
           </div>
         </div>

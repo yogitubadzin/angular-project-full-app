@@ -1,1 +1,28 @@
-<p>product-delete works!</p>
+<div class="text-center" *ngIf="!showSummary">
+  <div class="message-container border rounded">
+    Are you sure do yo want to remove this product?
+  </div>
+  <div>
+    <button
+      class="btn btn-primary"
+      (click)="deleteProduct()"
+    >
+     Delete
+    </button>
+  </div>
+</div>
+<div class="text-center" *ngIf="showSummary">
+  <div class="message-container border rounded">
+    Product was deleted.
+  </div>
+  <div>
+    <button class="btn btn-primary" [routerLink]="['/products']">
+      Go back to products
+    </button>
+  </div>
+</div>
+<div *ngIf="showError" class="text-danger">
+  <div class="error">
+    Error occured with sending form. Please message with Administrator.
+  </div>
+</div>
