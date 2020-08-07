@@ -13,14 +13,14 @@ export class CartListComponent implements OnInit {
   products: CartProductItem[];
   numberOfProducts = 0;
   overallPrice = 0;
-  productsSubscription$: Subscription;
+  productsSubscription: Subscription;
 
   constructor(private cartService: CartProductService, private router: Router) {
-    this.productsSubscription$ = new Subscription();
+    this.productsSubscription = new Subscription();
   }
 
   ngOnInit(): void {
-    this.productsSubscription$.add(
+    this.productsSubscription.add(
       this.cartService.products$.subscribe((result) => {
         this.numberOfProducts = 0;
         this.overallPrice = 0;
@@ -42,6 +42,6 @@ export class CartListComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.productsSubscription$.unsubscribe();
+    this.productsSubscription.unsubscribe();
   }
 }

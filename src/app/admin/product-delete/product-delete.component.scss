@@ -2,6 +2,7 @@
 
 .message-container {
   margin: auto;
+  margin-bottom: 20px;
   padding: 10px;
   background-color: $base-background-color;
   margin-top: 50px;
@@ -10,4 +11,8 @@
 
 button {
   width: 300px;
+}
+
+.error{
+  margin-top: 20px;
 }

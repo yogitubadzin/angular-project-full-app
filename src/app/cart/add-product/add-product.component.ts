@@ -50,7 +50,10 @@ export class AddProductComponent implements OnInit {
   }
 
   updateProduct(product: Product) {
+    // backend logic
     product.stockStatus = --product.stockStatus;
+    // end backend logic
+
     this.productService.update(product).subscribe(
       () => {
         this.showError = false;

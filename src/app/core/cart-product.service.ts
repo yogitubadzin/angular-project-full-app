@@ -1,3 +1,4 @@
+import { LocalStorageService } from './local-storage.service';
 import { CartProductItem } from '../models/cartProductItem';
 import { Injectable } from '@angular/core';
 import { of, BehaviorSubject, Subject } from 'rxjs';
@@ -13,16 +14,17 @@ export class CartProductService {
   private productsCounterSubject$ = new BehaviorSubject<number>(0);
   public productsCounter$ = this.productsCounterSubject$.asObservable();
 
-  constructor() {}
+  constructor(private localStorageService: LocalStorageService) {}
 
   public addProduct(product: Product) {
     return of(this.addProductToCart(product));
   }
 
   public fetchProducts() {
-    const retrievedDataCart = localStorage.getItem(this.dataCart);
-    const deserialisedDataCart = JSON.parse(retrievedDataCart);
-    const cartProductItems = deserialisedDataCart.map(function (value) {
+    const retrievedDataCart = this.localStorageService.getDataItem(
+      this.dataCart
+    );
+    const cartProductItems = retrievedDataCart.map(function (value) {
       return value[1];
     }) as CartProductItem[];
 
@@ -30,19 +32,20 @@ export class CartProductService {
   }
 
   public buy() {
-    localStorage.removeItem(this.dataCart);
+    this.localStorageService.removeDataItem(this.dataCart);
     this.productsCounterSubject$.next(0);
   }
 
   public countProducts() {
-    const retrievedDataCart = localStorage.getItem(this.dataCart);
-    if (retrievedDataCart === null || retrievedDataCart === undefined) {
+    const retrievedDataCart = this.localStorageService.getDataItem(
+      this.dataCart
+    );
+    if (retrievedDataCart == null) {
       return;
     }
 
-    const deserialisedDataCart = JSON.parse(retrievedDataCart);
     let productsCounter = 0;
-    deserialisedDataCart.map(function (value) {
+    retrievedDataCart.map(function (value) {
       productsCounter += value[1].count;
     });
 
@@ -50,13 +53,7 @@ export class CartProductService {
   }
 
   private addProductToCart(product: Product) {
-    const retrievedDataCart = localStorage.getItem(this.dataCart);
-    let dataCartMap: Map<string, CartProductItem>;
-    if (retrievedDataCart != null) {
-      dataCartMap = new Map(JSON.parse(retrievedDataCart));
-    } else {
-      dataCartMap = new Map();
-    }
+    let dataCartMap = this.localStorageService.getDataItemMap(this.dataCart);
 
     var cart = dataCartMap.get(product.id);
     if (cart != undefined) {
@@ -71,8 +68,8 @@ export class CartProductService {
       });
     }
 
-    const dataCartToSave = JSON.stringify(Array.from(dataCartMap.entries()));
-    localStorage.setItem(this.dataCart, dataCartToSave);
+    this.localStorageService.setDataItem(this.dataCart, dataCartMap);
+
     this.countProducts();
   }
 }

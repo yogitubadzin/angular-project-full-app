@@ -2,7 +2,6 @@
   <div class="message-container border rounded">
     Are you sure do yo want to remove this product?
   </div>
-  <br/>
   <div>
     <button
       class="btn btn-primary"
@@ -16,7 +15,6 @@
   <div class="message-container border rounded">
     Product was deleted.
   </div>
-  <br />
   <div>
     <button class="btn btn-primary" [routerLink]="['/products']">
       Go back to products
@@ -24,8 +22,7 @@
   </div>
 </div>
 <div *ngIf="showError" class="text-danger">
-  <br />
-  <div>
+  <div class="error">
     Error occured with sending form. Please message with Administrator.
   </div>
 </div>
