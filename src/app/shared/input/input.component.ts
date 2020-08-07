@@ -22,6 +22,12 @@ export class InputComponent implements OnInit {
 
   ngOnInit() {}
 
+  ngAfterViewInit() {
+    this.input.formControl.statusChanges.subscribe(() => {
+      this.input.setIsInvalid(this.showErrors());
+    });
+  }
+
   showErrors() {
     if (this.input.formControl === null) {
       return;
@@ -31,10 +37,7 @@ export class InputComponent implements OnInit {
     return dirty && touched && errors !== null;
   }
 
-  @HostListener('change')
   @HostListener('focusout')
-  @HostListener('click')
-  @HostListener('onkeyup')
   toggleOpen(event: Event) {
     this.input.setIsInvalid(this.showErrors());
   }
