@@ -1,0 +1,36 @@
+<div class="products-container">
+  <div class="products-list border rounded">
+    <h4>Cart Summary</h4>
+    <table class="table table-bordered">
+      <thead class="table-header">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Count</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>{{ product.count }}</td>
+          <td>{{ product.price | number:'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td><b>Summary</b></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>{{ numberOfProducts }}</td>
+          <td>{{ overallPrice | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="button-buy-products">
+  <button (click)="buyProducts()" class="btn btn-primary float-right">
+    Buy products
+  </button>
+</div>

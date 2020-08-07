@@ -1,0 +1,40 @@
+@import "../../../styles.scss";
+
+.button-buy-products {
+  margin: 10px;
+}
+
+.products-container {
+  display: flex;
+  justify-content: center;
+}
+
+.products-container > div {
+  background-color: $base-background-color;
+  margin: 10px;
+  padding: 20px;
+}
+
+.products-list {
+  width: 100%;
+}
+
+.products-list-container-center {
+  padding-top: 1px;
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  background-color: white;
+}
+
+.table-header{
+  color: #fff;
+  background-color: #007BFF;
+  border-color: #2e6da4;
+}
+
+h4{
+  margin-bottom: 20px;
+}

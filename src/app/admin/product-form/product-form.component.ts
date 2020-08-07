@@ -30,6 +30,12 @@ export class ProductFormComponent implements OnInit {
       Validators.min(1),
       Validators.max(1000),
     ]),
+    stockStatus: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]\d*$/),
+      Validators.min(0),
+      Validators.max(1000),
+    ]),
     id: this.fb.control('', []),
   });
 
@@ -66,5 +72,9 @@ export class ProductFormComponent implements OnInit {
 
   get price() {
     return this.productForm.get('price');
+  }
+
+  get stockStatus() {
+    return this.productForm.get('stockStatus');
   }
 }

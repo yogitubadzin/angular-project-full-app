@@ -1,6 +1,7 @@
 import { AuthService } from './../../core/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { CartProductService } from '../../core/cart-product.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,16 +10,31 @@ import { Subscription } from 'rxjs';
 })
 export class NavigationComponent implements OnInit {
   isLoggedIn: boolean;
-  isLoggedInSubscription: Subscription;
+  productsCounter: number;
+  subscriptions: Subscription;
+  productsCounter$: Observable<number>;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cartProductService: CartProductService
+  ) {
+    this.subscriptions = new Subscription();
+  }
 
   ngOnInit(): void {
-    this.isLoggedInSubscription = this.authService.isLoggedIn$.subscribe(
-      (result) => {
+    this.subscriptions.add(
+      this.authService.isLoggedIn$.subscribe((result) => {
         this.isLoggedIn = result;
-      }
+      })
     );
+
+    this.subscriptions.add(
+      this.cartProductService.productsCounter$.subscribe((result) => {
+        this.productsCounter = result;
+      })
+    );
+
+    this.cartProductService.countProducts();
   }
 
   login() {
@@ -29,6 +45,6 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.isLoggedInSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }
