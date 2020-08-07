@@ -11,12 +11,12 @@
   </div>
   <div class="product-content">
     <div class="product-content-field">Name: {{ product.name }}</div>
-    <div>
+    <div class="product-content-field">
       Price:
       <u
         ><i>{{ product.price | currency: "PLN":"symbol" }}</i></u
       >
     </div>
-    <div>Description: {{ product.description }}</div>
+    <div class="product-content-field">Description: {{ product.description }}</div>
   </div>
 </div>

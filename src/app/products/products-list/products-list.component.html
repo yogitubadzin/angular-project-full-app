@@ -1,5 +1,5 @@
 <div class="button-create-new-product" *ngIf="this.isLoggedIn">
-  <button class="btn btn-secondary" routerLink="/admin/products/create">
+  <button class="btn btn-secondary" [routerLink]="['/admin/products/create']">
     Create new Product
   </button>
 </div>
@@ -23,7 +23,7 @@
           <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"
-              routerLink="['/admin/products/edit', product.id]"
+              [routerLink]="['/admin/products/edit', product.id]"
             >
               Edit
             </button>
@@ -31,7 +31,7 @@
           <div class="p-2" *ngIf="this.isLoggedIn">
             <button
               class="btn btn-secondary"
-              routerLink="['/products', product.id]"
+              [routerLink]="['/products', product.id]"
             >
               Details
             </button>

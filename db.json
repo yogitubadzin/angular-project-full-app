@@ -23,6 +23,16 @@
       "email": "test@wp.pl",
       "message": "test hej",
       "id": 1
+    },
+    {
+      "email": "mail@a.pl",
+      "message": "Nic hehge",
+      "id": 2
+    },
+    {
+      "email": "test@wp.pl",
+      "message": "gefefef",
+      "id": 3
     }
   ],
   "products": [
@@ -34,10 +44,15 @@
     },
     {
       "name": "Skoda Octavia",
+      "description": "Car for family f",
       "price": "30",
-      "description": "Car for family",
-      "stockStatus": 0,
       "id": 3
+    },
+    {
+      "name": "Toyota Yaris",
+      "description": "Dobre auto ehh",
+      "price": "120",
+      "id": 4
     }
   ]
 }

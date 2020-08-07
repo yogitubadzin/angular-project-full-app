@@ -42,7 +42,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if (this.initialProduct !== null) {
+    if (this.initialProduct !== undefined) {
       this.productForm.patchValue(this.initialProduct);
     }
   }
