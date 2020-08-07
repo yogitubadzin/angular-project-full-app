@@ -40,19 +40,8 @@
       "name": "Skoda Superb",
       "description": "Very nice car heh",
       "price": "201",
-      "id": 2
-    },
-    {
-      "name": "Skoda Octavia",
-      "description": "Car for family f",
-      "price": "30",
-      "id": 3
-    },
-    {
-      "name": "Toyota Yaris",
-      "description": "Dobre auto ehh",
-      "price": "120",
-      "id": 4
+      "id": 2,
+      "stockStatus": -11
     }
   ]
 }
