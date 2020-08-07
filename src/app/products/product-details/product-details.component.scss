@@ -1,13 +1,25 @@
-.header {
+.button-back-to-list {
+  margin: 10px;
+}
+
+.product-details-container {
+  justify-content: center;
+  margin: 10px;
+}
+
+.product-header {
+  margin: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
   background-color: white;
-  padding: 10px;
+  text-align: center;
+  color: white;
 }
 
-.product-container {
-  display: flex;
-  align-items: center;
+.product-content {
+  margin: 10px;
 }
 
-.product-description-container {
-  flex-grow: 1;
+.product-content-field{
+  margin-bottom: 20px;
 }

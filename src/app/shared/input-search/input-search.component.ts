@@ -9,14 +9,14 @@ import {
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-product-filter',
-  templateUrl: './product-filter.component.html',
-  styleUrls: ['./product-filter.component.scss'],
+  selector: 'app-input-search',
+  templateUrl: './input-search.component.html',
+  styleUrls: ['./input-search.component.scss'],
 })
-export class ProductFilterComponent implements OnInit {
+export class InputSearchComponent implements OnInit {
   private queryFieldSubscription: Subscription;
-  @Output()
-  searchValue = new EventEmitter<String>();
+  @Output() searchValue = new EventEmitter<string>();
+  @Input() placeholder: string;
   queryField = new FormControl();
 
   constructor() {}

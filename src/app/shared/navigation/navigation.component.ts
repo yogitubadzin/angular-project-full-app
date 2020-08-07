@@ -1,4 +1,6 @@
+import { AuthService } from './../../core/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -6,7 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  constructor() {}
+  isLoggedIn: boolean;
+  isLoggedInSubscription: Subscription;
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.isLoggedInSubscription = this.authService.isLoggedIn$.subscribe(
+      (result) => {
+        this.isLoggedIn = result;
+      }
+    );
+  }
+
+  login() {
+    this.authService.login();
+  }
+  logout() {
+    this.authService.logout();
+  }
+
+  ngOnDestroy() {
+    this.isLoggedInSubscription.unsubscribe();
+  }
 }

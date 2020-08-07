@@ -19,7 +19,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.randomProductService.randomProducts.subscribe((result) => {
+      this.randomProductService.randomProducts$.subscribe((result) => {
         this.productsToDisplay = result;
       })
     );

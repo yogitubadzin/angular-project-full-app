@@ -12,10 +12,10 @@ export class ProductService {
     products: [],
     totalCount: 0,
   };
-  private productsSubject = new BehaviorSubject<Product[]>([]);
-  private totalCountSubject = new BehaviorSubject<number>(0);
-  public products = this.productsSubject.asObservable();
-  public totalCount = this.totalCountSubject.asObservable();
+  private productsSubject$ = new BehaviorSubject<Product[]>([]);
+  private totalCountSubject$ = new BehaviorSubject<number>(0);
+  public products$ = this.productsSubject$.asObservable();
+  public totalCount$ = this.totalCountSubject$.asObservable();
 
   constructor(private httpService: HttpClient) {}
 
@@ -30,15 +30,15 @@ export class ProductService {
   ) {
     let params = new HttpParams();
 
-    if (startPage != null) {
+    if (startPage !== null) {
       params = params.append('_start', startPage.toString());
     }
 
-    if (limitSize != null) {
+    if (limitSize !== null) {
       params = params.append('_limit', limitSize.toString());
     }
 
-    if (searchFilter != null) {
+    if (searchFilter !== null) {
       params = params.append('q', searchFilter);
     }
 
@@ -54,8 +54,8 @@ export class ProductService {
       )
       .subscribe((result) => {
         this.dataStore.products = result;
-        this.productsSubject.next(this.dataStore.products);
-        this.totalCountSubject.next(this.dataStore.totalCount);
+        this.productsSubject$.next(this.dataStore.products);
+        this.totalCountSubject$.next(this.dataStore.totalCount);
       });
   }
 }

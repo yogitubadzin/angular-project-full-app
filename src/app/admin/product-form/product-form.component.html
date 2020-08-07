@@ -1,0 +1,52 @@
+<div class="product-form-container border rounded">
+  <form
+    [formGroup]="productForm"
+    (ngSubmit)="onSubmit()"
+    class="needs-validation"
+    novalidate
+  >
+    <app-input label="Name">
+      <input
+        [appInputRef]="this.productForm.get('name')"
+        class="form-control"
+        [formControl]="name"
+        placeholder="Please enter name.."
+      />
+    </app-input>
+    <app-input label="Price"
+      ><input
+        [appInputRef]="this.productForm.get('price')"
+        class="form-control"
+        [formControl]="price"
+        placeholder="Please enter price.."
+    /></app-input>
+    <app-input label="Description"
+      ><input
+        [appInputRef]="this.productForm.get('description')"
+        class="form-control"
+        [formControl]="description"
+        placeholder="Please enter description.."
+    /></app-input>
+    <input type="hidden" id="id" [formControl]="id" />
+    <button
+      [disabled]="productForm.invalid"
+      type="submit"
+      class="btn btn-primary mr-1"
+      [ngClass]="{ disabled: productForm.invalid }"
+    >
+      Submit
+    </button>
+    <button
+    type="button"
+    class="btn btn-primary"
+    (click)="cancel()"
+  >
+    Cancel
+  </button>
+  </form>
+  <div *ngIf="showError" class="text-danger">
+    <div>
+      Error occured with sending form. Please message with Administrator.
+    </div>
+  </div>
+</div>

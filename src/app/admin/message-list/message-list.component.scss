@@ -1,0 +1,22 @@
+@import "../../../styles.scss";
+
+.messages-container {
+  display: flex;
+  justify-content: center;
+}
+
+.messages-container > div {
+  background-color: $base-background-color;
+  margin: 10px;
+  padding: 20px;
+}
+
+.messages-list {
+  width: 100%;
+}
+
+.messages-list-container-center {
+  padding-top: 1px;
+  display: flex;
+  justify-content: center;
+}

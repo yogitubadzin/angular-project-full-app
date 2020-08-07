@@ -1,0 +1,15 @@
+<div class="button-back-to-list">
+  <button class="btn btn-secondary" routerLink="/admin/messages">
+    Back to list
+  </button>
+</div>
+<div *ngIf="message" class="message-details-container border rounded shadow">
+  <div class="message-header header border rounded bg-dark">
+    <h2>
+      <i>{{ message.email }}</i>
+    </h2>
+  </div>
+  <div class="message-content">
+    <div>Email: {{ message.message }}</div>
+  </div>
+</div>

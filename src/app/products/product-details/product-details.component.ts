@@ -1,5 +1,5 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  @Input()
   product: Product;
+  productSubscription: Subscription;
 
   constructor(
     private productService: ProductService,
@@ -19,10 +19,16 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
+    const productId = this.route.snapshot.params['id'];
 
-    this.productService.getProductById(id).subscribe((data) => {
-      this.product = data;
-    });
+    this.productSubscription = this.productService
+      .getProductById(productId)
+      .subscribe((result) => {
+        this.product = result;
+      });
+  }
+
+  ngOnDestroy() {
+    this.productSubscription.unsubscribe();
   }
 }

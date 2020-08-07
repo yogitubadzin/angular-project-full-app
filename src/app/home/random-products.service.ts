@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 
@@ -8,14 +8,10 @@ import { tap, map } from 'rxjs/operators';
 export class RandomProductsService {
   private baseUrl = '/api/products';
   private dataStore = { randomProducts: [], totalPages: 0 };
-  private randomProductsSubject = new BehaviorSubject<Product[]>([]);
-  public randomProducts = this.randomProductsSubject.asObservable();
+  private randomProductsSubject$ = new BehaviorSubject<Product[]>([]);
+  public randomProducts$ = this.randomProductsSubject$.asObservable();
 
   constructor(private httpService: HttpClient) {}
-
-  public getProductById(id: string): Observable<Product> {
-    return this.httpService.get<Product>(`${this.baseUrl}/${id}`);
-  }
 
   public fetchFirstPageRandomProducts() {
     if (this.dataStore.totalPages > 0) {
@@ -56,7 +52,7 @@ export class RandomProductsService {
       )
       .subscribe((result) => {
         this.dataStore.randomProducts = result;
-        this.randomProductsSubject.next(this.dataStore.randomProducts);
+        this.randomProductsSubject$.next(this.dataStore.randomProducts);
       });
   }
 }

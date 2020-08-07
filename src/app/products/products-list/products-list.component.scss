@@ -1,5 +1,9 @@
 @import "../../../styles.scss";
 
+.button-create-new-product {
+  margin: 10px;
+}
+
 .products-container {
   display: flex;
   justify-content: center;
@@ -12,11 +16,7 @@
 }
 
 .products-list {
-  width: 40%;
-}
-
-.products-details {
-  width: 60%;
+  width: 100%;
 }
 
 .products-list-container-center {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ContactService } from '../contact.service';
 
 @Component({
@@ -23,7 +23,10 @@ export class ContactFormComponent implements OnInit {
   showSummary: boolean;
   showError: boolean;
 
-  constructor(private contactService: ContactService, private fb: FormBuilder) {}
+  constructor(
+    private contactService: ContactService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {}
 
@@ -32,6 +35,7 @@ export class ContactFormComponent implements OnInit {
       .sendMessage({
         email: this.email.value,
         message: this.message.value,
+        id: null,
       })
       .subscribe(
         () => {

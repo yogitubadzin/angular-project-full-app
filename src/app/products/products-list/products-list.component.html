@@ -1,32 +1,52 @@
+<div class="button-create-new-product" *ngIf="this.isLoggedIn">
+  <button class="btn btn-secondary" routerLink="/admin/products/create">
+    Create new Product
+  </button>
+</div>
 <div class="products-container">
   <div class="products-list border rounded">
-    <app-product-filter (searchValue)="filterData($event)"></app-product-filter>
-    <br />
+    <app-input-search (searchValue)="filterData($event)" placeholder="Search products.."></app-input-search>
     <ul class="list-group">
       <li
         class="list-group-item list-group-item-action"
-        *ngFor="let product of products | async"
+        *ngFor="let product of products$ | async"
         (click)="onClick(product)"
-        [ngClass]="{'active': product.id === selectedProduct.id, 'text-danger': product.price === 0}"
+        [ngClass]="{
+          active: product.id === selectedProductId,
+          'text-danger': product.price === 0
+        }"
       >
-        <div>
-          {{ product.name }} {{ product.price | currency: "PLN":true }}
+        <div class="d-flex">
+          <div class="mr-auto p-2">
+            {{ product.name }} {{ product.price | currency: "PLN":"symbol" }}
+          </div>
+          <div class="p-2" *ngIf="this.isLoggedIn">
+            <button
+              class="btn btn-secondary"
+              routerLink="['/admin/products/edit', product.id]"
+            >
+              Edit
+            </button>
+          </div>
+          <div class="p-2" *ngIf="this.isLoggedIn">
+            <button
+              class="btn btn-secondary"
+              routerLink="['/products', product.id]"
+            >
+              Details
+            </button>
+          </div>
         </div>
       </li>
     </ul>
     <div class="products-list-container-center">
       <pagination
-        [totalItems]="totalItems | async"
+        [totalItems]="totalItems$ | async"
         [itemsPerPage]="limitSize"
         [(ngModel)]="currentPage"
         (pageChanged)="pageChanged($event.page)"
       >
       </pagination>
-    </div>
-  </div>
-  <div class="products-details border rounded">
-    <div *ngIf="selectedProduct">
-      <app-product-details [product]="selectedProduct"></app-product-details>
     </div>
   </div>
 </div>

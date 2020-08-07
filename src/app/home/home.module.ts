@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import {  } from '@angular/common/http';
 import { HomeRoutingModule } from './home-routing.module';
 import { ProductTileComponent } from './product-tile/product-tile.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -13,7 +13,6 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule
