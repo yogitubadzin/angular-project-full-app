@@ -44,17 +44,11 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.productToSave.emit({
-      name: this.name.value,
-      price: this.price.value,
-      description: this.description.value,
-      stockStatus: this.stockStatus.value,
-      id: this.id.value,
-    });
+    this.productToSave.emit(this.productForm.value);
   }
 
   ngOnChanges() {
-    if (this.initialProduct != null) {
+    if (this.initialProduct !== null) {
       this.productForm.patchValue(this.initialProduct);
     }
   }

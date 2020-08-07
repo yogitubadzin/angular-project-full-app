@@ -18,13 +18,18 @@
       "id": 2
     }
   },
-  "contact": [],
+  "contact": [
+    {
+      "email": "test@wp.pl",
+      "message": "test hej",
+      "id": 1
+    }
+  ],
   "products": [
     {
       "name": "Skoda Superb",
-      "price": "200",
-      "description": "Very nice car",
-      "stockStatus": "10",
+      "description": "Very nice car heh",
+      "price": "201",
       "id": 2
     },
     {

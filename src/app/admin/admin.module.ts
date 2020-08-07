@@ -13,7 +13,6 @@ import { MessageListComponent } from './message-list/message-list.component';
 import { MessageDetailsComponent } from './message-details/message-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { AdminContactService } from './admin-contact.service';
 
@@ -34,7 +33,6 @@ import { AdminContactService } from './admin-contact.service';
     FormsModule,
     ReactiveFormsModule,
     PaginationModule,
-    HttpClientModule,
     SharedModule,
   ],
   providers: [AdminContactService, AdminProductService],

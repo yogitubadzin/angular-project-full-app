@@ -22,19 +22,22 @@ export class InputComponent implements OnInit {
 
   ngOnInit() {}
 
+  ngAfterViewInit() {
+    this.input.formControl.statusChanges.subscribe(() => {
+      this.input.setIsInvalid(this.showErrors());
+    });
+  }
+
   showErrors() {
     if (this.input.formControl === null) {
       return;
     }
 
     const { dirty, touched, errors } = this.input.formControl;
-    return dirty && touched && errors != null;
+    return dirty && touched && errors !== null;
   }
 
-  @HostListener('change', ['$event'])
-  @HostListener('focusout', ['$event'])
-  @HostListener('click', ['$event'])
-  @HostListener('onkeyup', ['$event'])
+  @HostListener('focusout')
   toggleOpen(event: Event) {
     this.input.setIsInvalid(this.showErrors());
   }

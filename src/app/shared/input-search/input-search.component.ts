@@ -14,21 +14,21 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./input-search.component.scss'],
 })
 export class InputSearchComponent implements OnInit {
-  private queryFieldSubscription$: Subscription;
-  @Output() searchValue = new EventEmitter<String>();
+  private queryFieldSubscription: Subscription;
+  @Output() searchValue = new EventEmitter<string>();
   @Input() placeholder: string;
   queryField = new FormControl();
 
   constructor() {}
 
   ngOnInit(): void {
-    this.queryFieldSubscription$ = this.queryField.valueChanges
+    this.queryFieldSubscription = this.queryField.valueChanges
       .pipe(startWith(''), debounceTime(400), distinctUntilChanged())
       .subscribe((value) => this._filter(value));
   }
 
   ngDestroy() {
-    this.queryFieldSubscription$.unsubscribe();
+    this.queryFieldSubscription.unsubscribe();
   }
 
   private _filter(value: string) {

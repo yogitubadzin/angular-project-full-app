@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class ProductEditComponent implements OnInit {
   showError: boolean;
   product: Product;
-  productSubscription$: Subscription;
+  productSubscription: Subscription;
 
   constructor(
     private adminProductService: AdminProductService,
@@ -23,7 +23,7 @@ export class ProductEditComponent implements OnInit {
   ngOnInit() {
     const productId = this.route.snapshot.params['id'];
 
-    this.productSubscription$ = this.adminProductService
+    this.productSubscription = this.adminProductService
       .getById(productId)
       .subscribe((result) => {
         this.product = result;

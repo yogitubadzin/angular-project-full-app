@@ -10,11 +10,11 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class MessageListComponent implements OnInit {
   private filter: string;
-  private messagesSubscription$: Subscription;
+  private messagesSubscription: Subscription;
   messages$: Observable<Message[]>;
   selectedMessageId: string;
   selectedMessageDetailsId: string;
-  totalItems$: Observable<Number>;
+  totalItems$: Observable<number>;
   ismessageChanged: boolean;
   currentPage = 1;
   limitSize = 5;
@@ -25,7 +25,7 @@ export class MessageListComponent implements OnInit {
     this.messages$ = this.adminContactService.messages$;
     this.totalItems$ = this.adminContactService.totalCount$;
 
-    this.messagesSubscription$ = this.messages$.subscribe((result) => {
+    this.messagesSubscription = this.messages$.subscribe((result) => {
       if (result.length === 0) {
         this.setSelectedmessageId(null);
         return;
@@ -57,7 +57,7 @@ export class MessageListComponent implements OnInit {
   }
 
   ngDestroy() {
-    this.messagesSubscription$.unsubscribe();
+    this.messagesSubscription.unsubscribe();
   }
 
   private calculateStartPage() {

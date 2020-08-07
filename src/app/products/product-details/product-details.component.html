@@ -1,5 +1,5 @@
 <div class="button-back-to-list">
-  <button class="btn btn-secondary" [routerLink]="['/products']">
+  <button class="btn btn-secondary" routerLink="/products">
     Back to list
   </button>
 </div>
@@ -9,17 +9,14 @@
       <i>{{ product.name }}</i>
     </h2>
   </div>
-  <br />
   <div class="product-content">
-    <div>Name: {{ product.name }}</div>
-    <br />
+    <div class="product-content-field">Name: {{ product.name }}</div>
     <div>
       Price:
       <u
         ><i>{{ product.price | currency: "PLN":"symbol" }}</i></u
       >
     </div>
-    <br />
     <div>Description: {{ product.description }}</div>
   </div>
 </div>
