@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../product.service';
 import { Observable, Subscription } from 'rxjs';
-import { AuthService } from 'src/app/core/auth.service';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductDeleteComponent } from 'src/app/admin/product-delete/product-delete.component';
 
 @Component({
@@ -21,23 +20,15 @@ export class ProductsListComponent implements OnInit {
   isProductChanged: boolean;
   currentPage = 1;
   limitSize = 5;
-  isLoggedIn: boolean;
 
   constructor(
     private productService: ProductService,
-    private authService: AuthService,
     public dialog: MatDialog
   ) {
     this.subscriptions = new Subscription();
   }
 
   ngOnInit() {
-    this.subscriptions.add(
-      this.authService.isLoggedIn$.subscribe((result) => {
-        this.isLoggedIn = result;
-      })
-    );
-
     this.products$ = this.productService.products$;
     this.totalItems$ = this.productService.totalCount$;
 

@@ -7,6 +7,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule } from '@angular/router';
 import { InputRefDirective } from './input-ref.directive';
 import { InputSearchComponent } from './input-search/input-search.component';
+import { LoggedInDirective } from './logged-in.directive';
+import { NotLoggedInDirective } from './not-logged-in.directive';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { InputSearchComponent } from './input-search/input-search.component';
     NavigationComponent,
     InputRefDirective,
     InputSearchComponent,
+    LoggedInDirective,
+    NotLoggedInDirective,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
   exports: [
@@ -23,6 +27,8 @@ import { InputSearchComponent } from './input-search/input-search.component';
     NavigationComponent,
     InputRefDirective,
     InputSearchComponent,
+    LoggedInDirective,
+    NotLoggedInDirective,
   ],
 })
 export class SharedModule {}

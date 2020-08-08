@@ -1,4 +1,4 @@
-<div class="button-create-new-product" *ngIf="this.isLoggedIn">
+<div class="button-create-new-product" *appLoggedIn>
   <button class="btn btn-secondary" [routerLink]="['/admin/products/create']">
     Create new Product
   </button>
@@ -34,7 +34,7 @@
               Add to Cart
             </button>
           </div>
-          <div class="p-2" *ngIf="this.isLoggedIn">
+          <div class="p-2" *appLoggedIn>
             <button
               class="btn btn-secondary"
               [routerLink]="['/admin/products/edit', product.id]"
@@ -50,7 +50,7 @@
               Details
             </button>
           </div>
-          <div class="p-2" *ngIf="this.isLoggedIn">
+          <div class="p-2" *appLoggedIn>
             <button
               mat-button
               class="btn btn-secondary"

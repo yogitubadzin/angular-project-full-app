@@ -23,12 +23,6 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.authService.isLoggedIn$.subscribe((result) => {
-        this.isLoggedIn = result;
-      })
-    );
-
-    this.subscriptions.add(
       this.cartProductService.productsCounter$.subscribe((result) => {
         this.productsCounter = result;
       })

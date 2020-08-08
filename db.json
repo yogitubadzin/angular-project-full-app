@@ -37,11 +37,11 @@
   ],
   "products": [
     {
-      "name": "rerere",
-      "description": "fdfdfdfd",
-      "price": "33",
+      "name": "Product1",
+      "description": "dsdsd",
+      "price": "22",
       "stockStatus": 4,
-      "id": 5
+      "id": 1
     }
   ]
 }
