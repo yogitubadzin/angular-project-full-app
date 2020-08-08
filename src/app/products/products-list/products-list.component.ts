@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../product.service';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductDeleteComponent } from 'src/app/admin/product-delete/product-delete.component';
 
 @Component({
   selector: 'app-products-list',
@@ -23,7 +25,8 @@ export class ProductsListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) {
     this.subscriptions = new Subscription();
   }
@@ -73,6 +76,19 @@ export class ProductsListComponent implements OnInit {
 
   ngDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  openDialog() {
+    this.dialog
+      .open(ProductDeleteComponent, {
+        data: this.selectedProductId,
+        height: '150px',
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.filterData(this.filter);
+      });
   }
 
   private calculateStartPage() {

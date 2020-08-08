@@ -37,11 +37,11 @@
   ],
   "products": [
     {
-      "name": "Skoda Superb",
-      "description": "Very nice car heh",
-      "price": "201",
-      "id": 2,
-      "stockStatus": -11
+      "name": "rerere",
+      "description": "fdfdfdfd",
+      "price": "33",
+      "stockStatus": 4,
+      "id": 5
     }
   ]
 }

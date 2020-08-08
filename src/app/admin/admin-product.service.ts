@@ -17,10 +17,6 @@ export class AdminProductService {
     return this.httpService.put<Product>(`${this.baseUrl}/${product.id}`, product);
   }
 
-  public delete(productId: string) {
-    return this.httpService.delete(`${this.baseUrl}/${productId}`);
-  }
-
   public getById(id: string): Observable<Product> {
     return this.httpService.get<Product>(`${this.baseUrl}/${id}`);
   }

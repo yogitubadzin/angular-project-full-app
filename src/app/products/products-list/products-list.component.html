@@ -52,8 +52,9 @@
           </div>
           <div class="p-2" *ngIf="this.isLoggedIn">
             <button
+              mat-button
               class="btn btn-secondary"
-              [routerLink]="['/admin/products/delete', product.id]"
+              (click)="openDialog()"
             >
               Delete
             </button>

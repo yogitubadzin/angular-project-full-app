@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AdminProductService } from '../admin-product.service';
+import { ProductGlobalService } from './../../core/product-global.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-delete',
@@ -13,23 +13,28 @@ export class ProductDeleteComponent implements OnInit {
   productId: string;
 
   constructor(
-    private route: ActivatedRoute,
-    private adminProductService: AdminProductService
+    private productGlobalService: ProductGlobalService,
+    public dialogRef: MatDialogRef<ProductDeleteComponent>,
+    @Inject(MAT_DIALOG_DATA) public dialogData: string
   ) {
-    this.productId = this.route.snapshot.params['id'];
+    this.productId = this.dialogData;
   }
 
   ngOnInit(): void {}
 
   deleteProduct() {
-    this.adminProductService.delete(this.productId).subscribe(
+    this.productGlobalService.delete(this.productId).subscribe(
       () => {
         this.showError = false;
-        this.showSummary = true;
+        this.dialogRef.close();
       },
       () => {
         this.showError = true;
       }
     );
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

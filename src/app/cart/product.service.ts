@@ -16,4 +16,8 @@ export class ProductService {
   public update(product: Product) {
     return this.httpService.put<Product>(`${this.baseUrl}/${product.id}`, product);
   }
+
+  public delete(productId: string) {
+    return this.httpService.delete(`${this.baseUrl}/${productId}`);
+  }
 }

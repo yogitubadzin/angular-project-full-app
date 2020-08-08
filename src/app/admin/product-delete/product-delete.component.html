@@ -2,23 +2,17 @@
   <div class="message-container border rounded">
     Are you sure do yo want to remove this product?
   </div>
-  <div>
-    <button
-      class="btn btn-primary"
-      (click)="deleteProduct()"
-    >
-     Delete
-    </button>
-  </div>
-</div>
-<div class="text-center" *ngIf="showSummary">
-  <div class="message-container border rounded">
-    Product was deleted
-  </div>
-  <div>
-    <button class="btn btn-primary" [routerLink]="['/products']">
-      Go back to products
-    </button>
+  <div class="d-flex justify-content-end">
+    <div class="cancel-button">
+      <button class="btn btn-secondary" (click)="closeDialog()">
+        Cancel
+      </button>
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="deleteProduct()">
+        Delete
+      </button>
+    </div>
   </div>
 </div>
 <div *ngIf="showError" class="text-danger">

@@ -5,6 +5,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -12,8 +13,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     HttpClientModule,
     PaginationModule.forRoot(),
     OAuthModule.forRoot(),
+    MatDialogModule,
   ],
-  providers: [AuthGuard, AuthService]
+  providers: [AuthGuard, AuthService],
+  exports: [MatDialogModule],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
