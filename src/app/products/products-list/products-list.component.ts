@@ -79,16 +79,18 @@ export class ProductsListComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog
-      .open(ProductDeleteComponent, {
-        data: this.selectedProductId,
-        height: '150px',
-        width: '600px',
-      })
-      .afterClosed()
-      .subscribe(() => {
-        this.filterData(this.filter);
-      });
+    this.subscriptions.add(
+      this.dialog
+        .open(ProductDeleteComponent, {
+          data: this.selectedProductId,
+          height: '150px',
+          width: '600px',
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.filterData(this.filter);
+        })
+    );
   }
 
   private calculateStartPage() {
